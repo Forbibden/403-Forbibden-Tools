@@ -1,0 +1,547 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<title>403forbibden</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Stable Diffusion, Midjourney ve AI modelleri için test edilmiş, yüksek stabiliteye sahip prompt kütüphanesi.">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<link rel="icon" href="/assets/image/favicon.svg" />    
+<style>
+:root {
+    --bg-body: #191b1f;
+    --bg-panel: #202328;
+    --bg-soft: #262a30;
+    --text-main: #e1e3e6;
+    --text-muted: #8a8d91;
+    --accent: #5b89ff;
+    --green: #3fb950;
+    --yellow: #d29922;
+    --red: #f85149;
+}
+
+*{margin:0;padding:0;box-sizing:border-box}
+
+body {
+    background: var(--bg-body);
+    color: var(--text-main);
+    font-family: Inter,system-ui,sans-serif;
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+
+.header{
+    padding:30px 60px;
+    display:flex;
+    justify-content:space-between;
+}
+
+.logo{
+    font-weight:600;
+    font-size:18px;
+}
+
+.main{
+    flex: 1; 
+    width: 100%; 
+    max-width:900px;
+    margin:60px auto 100px;
+    padding:0 20px;
+}
+
+h1{
+    font-size:32px;
+    margin-bottom:10px;
+}
+
+.subtitle{
+    color:var(--text-muted);
+    margin-bottom:50px;
+}
+
+/* ACCORDION */
+.accordion-item{
+    background:var(--bg-panel);
+    border-radius:14px;
+    margin-bottom:20px;
+    overflow:hidden;
+}
+
+.accordion-header{
+    padding:22px 28px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    cursor:pointer;
+}
+
+.accordion-header:hover{
+    background:rgba(255,255,255,0.02);
+}
+
+.accordion-content{
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s ease, padding 0.4s ease;
+    background: var(--bg-soft);
+    padding: 0 28px;
+}
+.accordion-content.open {
+    padding: 25px 28px;
+}
+
+.title{
+    font-size:17px;
+    font-weight:500;
+}
+
+.meta{
+    display:flex;
+    gap:15px;
+    align-items:center;
+    font-size:13px;
+}
+
+.badge{
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    background:rgba(91,137,255,0.15);
+    color:var(--accent);
+    padding:6px 10px;
+    border-radius:20px;
+}
+
+.inner{
+    padding:25px 0;
+}
+
+.info{
+    font-size:14px;
+    color:var(--text-muted);
+    margin-bottom:20px;
+}
+
+.info-box{
+    display:flex;
+    gap:14px;
+    padding:16px 18px;
+    border-radius:12px;
+    margin-bottom:20px;
+    background:rgba(91,137,255,0.08);
+    border:1px solid rgba(91,137,255,0.15);
+}
+
+.info-icon{
+    width:32px;
+    height:32px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    border-radius:50%;
+    background:rgba(91,137,255,0.15);
+    color:var(--accent);
+    font-size:14px;
+    flex-shrink:0;
+}
+
+.info-title{
+    font-size:13px;
+    font-weight:600;
+    margin-bottom:4px;
+}
+
+.info-text{
+    font-size:13px;
+    color:var(--text-muted);
+    line-height:1.6;
+}
+
+.info-box.low{
+    background:rgba(248,81,73,0.08);
+    border:1px solid rgba(248,81,73,0.15);
+}
+
+.info-box.low .info-icon{
+    background:rgba(248,81,73,0.15);
+    color:var(--red);
+}
+
+.code{
+    background:#1a1c20;
+    padding:20px;
+    border-radius:10px;
+    font-family:monospace;
+    font-size:13px;
+    line-height:1.6;
+    white-space:pre-wrap;
+    margin-bottom:20px;
+}
+
+.btn {
+    padding: 10px 18px;
+    border-radius: 8px;
+    background: var(--accent);
+    border: none;
+    color: #fff;
+    cursor: pointer;
+    display: inline-flex; 
+    align-items: center;
+    gap: 8px; 
+    margin-bottom: 10px; 
+}
+
+footer {
+    height: 40px;
+    background: var(--bg-panel);
+    border-top: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 20px;
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    user-select: none;
+    flex-shrink: 0;
+}
+
+.version-badge {
+    background: var(--bg-input);
+    padding: 2px 6px;
+    border-radius: 4px;
+    border: 1px solid var(--border);
+    font-size: 0.7rem;
+    font-family: monospace;
+}
+
+.footer-left, .footer-right {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.social-link {
+    color: var(--text-muted);
+    transition: 0.2s;
+    text-decoration: none;
+    font-size: 1rem;
+    display: flex;
+    align-items: center;
+}
+
+.social-link:hover {
+    color: var(--accent); 
+    transform: translateY(-2px); 
+}
+
+.tags{
+    display:flex;
+    gap:8px;
+    margin-top: 5px;
+}
+
+.tag{
+    font-size:12px;
+    padding:2px 5px;
+    border-radius:20px;
+    background:rgba(255,255,255,0.04);
+    border:1px solid rgba(255,255,255,0.05);
+}
+
+.disclaimer{
+    background: rgba(255, 170, 91, 0.1);
+    border: 1px solid rgba(255, 170, 91, 0.25);
+    color: var(--text-main);
+    padding: 15px 20px;
+    border-radius: 5px;
+    font-size: 13px;
+    margin: 40px 0;
+    text-align: center;
+    line-height: 1.5;
+}
+
+
+.toast {
+    position: fixed;
+    bottom: 50px;
+    right: 30px;
+    background: var(--bg-panel);
+    color: var(--text-main);
+    padding: 14px 24px;
+    border-radius: 10px;
+    border-left: 4px solid var(--green); 
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 14px;
+    font-weight: 500;
+    z-index: 9999;
+    transform: translateX(150%); 
+    transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); 
+}
+
+.toast.show {
+    transform: translateX(0); 
+}
+</style>
+</head>
+<body>
+
+<div class="header">
+  <a href="../index.html" class="logo" style="display: flex; align-items: center; gap: 8px; text-decoration: none; color: inherit;">
+    <svg width="30" height="30" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M4 3H18C19.1 3 20 3.9 20 5V19C20 20.1 19.1 21 18 21H4C2.9 21 2 20.1 2 19V5C2 3.9 2.9 3 4 3Z" fill="#262a30" stroke="#e1e3e6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      <path d="M6 7H18M6 11H18M6 15H12" stroke="#5b89ff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+    AI Library
+</a>
+</div>
+
+<div class="main">
+
+    <div class="disclaimer">
+    <p><i class="fa-solid fa-triangle-exclamation" style="color: #d29922;"></i> Bu web sitesindeki promptlar <strong> 403forbibden tarafından oluşturulmamıştır. </strong>  Promptlar, Discord, forumlar ve diğer herkese açık kaynaklarda paylaşılan içeriklerden derlenmiştir. Telif hakkı ilgili sahibine aittir.</p>
+    </div>
+
+    <!-- STABLE PROMPT (AUTO OPEN) -->
+    <div class="accordion-item">
+        <div class="accordion-header">
+            <div>
+                <div class="title">Sosyal Medya Konsepti (Kusursuz Karışım)</div>
+                <div class="tags">
+                    <div class="tag" style="background-color: rgba(255, 170, 91, 0.15); color: rgb(255, 189, 91);"><i class="fa-solid fa-globe"></i> Global</div>
+                    <div class="tag" style="background-color: rgba(110, 255, 91, 0.15); color: rgb(118, 255, 91);"><i class="fa-solid fa-check-double"></i> Stabil</div>
+                </div>
+            </div>
+
+            <div class="meta">
+                    <div class="badge"><svg xmlns="http://www.w3.org/2000/svg" 
+                    width="18" height="18" 
+                    viewBox="0 0 24 24" 
+                    fill="currentColor">
+                <path d="M12 2L14 8L20 10L14 12L12 18L10 12L4 10L10 8Z"/>
+                <path d="M19 14L20 17L23 18L20 19L19 22L18 19L15 18L18 17Z" opacity="0.6"/>
+                <path d="M5 15L6 17L8 18L6 19L5 21L4 19L2 18L4 17Z" opacity="0.6"/>
+                </svg>
+                    Google Gemini</div>
+            </div>
+    </div>
+        <div class="accordion-content">
+            <div class="inner">
+                <div class="info-box success">
+                    <div class="info-icon">
+                        <i class="fa-solid fa-brain"></i>
+                    </div>
+                    <div class="info-content">
+                        <div class="info-title">Yüksek Stabilite</div>
+                        <div class="info-text">
+                            Bu prompt görev tanımını net verir: yüz korunur, poz aktarılır ve ortam GTA V içinde yeniden oluşturulur. Negatif talimatlar vardır ancak aşırı tekrar içermez.
+                        </div>
+                    </div>
+                </div>
+                <div class="code" id="p1">
+Generate a raw GTA V in-game screenshot (FiveM/Menyoo style) by blending these two references for a social media post: Character Source (Image 1 - GTA V Character): Preserve the original GTA V mesh structure and in-game texture resolution without increasing detail. Do NOT beautify, smooth, or photorealistically enhance the face. It must look like the original 3D game model. Pose & Style Source (Image 2 - Reference): Transfer the exact pose, body language, outfit, accessories, and camera angle from this image onto the GTA V character. Context: The character is 21 years old. Place her in a fitting GTA V Los Santos environment that matches the lighting of the reference. The final result must look like an unedited, authentic gameplay screenshot, not a realistic photo. NO HUD elements. Safety: Generate only fictional, safe-for-work video game style content; no real-person identity transfer or deepfake-like edits. Do not add subsurface skin detail, pore detail, or high dynamic range lighting.
+                </div>
+                <button class="btn" onclick="copyPrompt('p1')"><i class="fa-regular fa-copy"></i> Promptu Kopyala</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- SECOND PROMPT -->
+    <div class="accordion-item">
+        <div class="accordion-header">
+            <div class="title">Katı Yüz Korumalı Poz Aktarımı (Erkek)
+                 <div class="tags">
+                    <div class="tag" style="background-color: rgba(91, 94, 255, 0.15); color: rgb(91, 135, 255);"><i class="fa-solid fa-mars"></i> Male</div>
+                    <div class="tag" style="background-color: rgba(255, 91, 91, 0.15); color: rgb(255, 91, 91);"><i class="fa-solid fa-xmark"></i> Düşük Stabilite</div>
+                </div>
+            </div>
+            
+            <div class="meta">
+                <div class="badge"><svg xmlns="http://www.w3.org/2000/svg" 
+                    width="18" height="18" 
+                    viewBox="0 0 24 24" 
+                    fill="currentColor">
+                <path d="M12 2L14 8L20 10L14 12L12 18L10 12L4 10L10 8Z"/>
+                <path d="M19 14L20 17L23 18L20 19L19 22L18 19L15 18L18 17Z" opacity="0.6"/>
+                <path d="M5 15L6 17L8 18L6 19L5 21L4 19L2 18L4 17Z" opacity="0.6"/>
+                </svg>
+                    Google Gemini</div>
+            </div>
+        </div>
+        <div class="accordion-content">
+            <div class="inner">
+                <div class="info-box low">
+                    <div class="info-icon">
+                        <i class="fa-solid fa-brain"></i>
+                    </div>
+                    <div class="info-content">
+                        <div class="info-title">Düşük Stabilite</div>
+                        <div class="info-text">
+                            Bu prompt aşırı katı “%100 identical” ve yoğun negatif talimat içerir. Modelden yüzü tamamen sabit tutması istenirken aynı zamanda yeni sahne ve poz üretmesi beklenir. Bu katı kısıtlamalar bazı denemelerde photoreal detay eklenmesine veya yüzün hafif değişmesine yol açabilir.</div>
+                    </div>
+                </div>
+                <div class="code" id="p2">
+Use ONLY the uploaded GTA V male character’s ORIGINAL FACE and ORIGINAL HAIR. The character’s face must remain 100% IDENTICAL to the original GTA V face model with absolutely NO changes of any kind. Do NOT modify, beautify, smooth, enhance, replace, reshape, blend, stylize, reinterpret, or alter the face in any way. Do NOT change facial structure, proportions, jawline, nose, lips, eyes, eyebrows, ears, cheekbones, head shape, skull structure, or any facial detail. Keep the exact GTA V skin texture, skin tone, polygon structure, imperfections, roughness, and all in-game facial materials exactly as they are. Do NOT improve skin quality, do NOT remove GTA V graphical artifacts, and do NOT add realism or photorealistic detail. The hair must remain completely unchanged and identical to the original GTA V hair model, including haircut, hairline, length, density, texture, and GTA V hair material. If the character has facial hair, beard, or stubble, it must remain exactly the same with no edits, no enhancements, no reshaping, and no added detail. Do NOT copy, recreate, reference, imitate, or blend the real man’s face from the reference image under any circumstances. Do NOT mix facial features, do NOT introduce realistic human elements, and do NOT transfer facial expressions or facial details from the reference man. Everything must remain strictly within the original GTA V graphical style and engine limitations. From the reference man’s photo, take ONLY the pose, body posture, outfit, clothing pieces, accessories, and jewelry, and recreate them on the GTA V character while keeping the original GTA V face and hair completely untouched. Do NOT transfer facial expressions or any facial information from the reference image. The final image must look exactly like a real in-game screenshot captured directly inside GTA V using Menyoo, RageMP, or FiveM. Use Rockstar Advanced Game Engine lighting, authentic GTA V shaders, original GTA V textures, GTA V skin materials, and GTA V hair materials. Maintain hard GTA V shadows, visible polygon edges, in-game lighting imperfections, and typical GTA V rendering artifacts. Do NOT use cinematic lighting, Unreal Engine style, ray tracing, hyperrealism, depth-of-field effects, film grain, motion blur, or real-life photography aesthetics. The background environment is EXTREMELY IMPORTANT and must be 100% GTA V–accurate. The scene must take place in a recognizable GTA V world environment such as Los Santos streets, Vespucci Beach, Downtown LS, Mirror Park, a GTA V parking lot, alleyway, highway, or urban neighborhood. Use only GTA V buildings, roads, sidewalks, props, vegetation, skybox, and environmental assets. The background must clearly look like it was rendered inside GTA V, with correct scale, lighting, textures, and world geometry. Do NOT use real-life locations, real-world photography, Unreal-style environments, or generic backgrounds. The environment must fully match GTA V’s in-game map, assets, and visual limitations. The final result must be a GTA V male character with his original, completely unchanged face and hair, wearing the outfit, accessories, and jewelry from the reference man, posed the same way, standing inside a fully authentic GTA V environment, and looking exactly like a raw in-game screenshot taken directly from GTA V without any external rendering or post-processing.
+                </div>
+                <button class="btn" onclick="copyPrompt('p2')"><i class="fa-regular fa-copy"></i> Promptu Kopyala</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- THREE PROMPT -->
+    <div class="accordion-item">
+        <div class="accordion-header">
+            <div class="title">Katı Yüz Korumalı Poz Aktarımı (Kadın)
+                <div class="tags">
+                    <div class="tag" style="background-color: rgba(255, 91, 192, 0.15); color: rgba(255, 91, 192, 1);"><i class="fa-solid fa-venus"></i> Female</div>
+                    <div class="tag" style="background-color: rgba(255, 91, 91, 0.15); color: rgb(255, 91, 91);"><i class="fa-solid fa-xmark"></i> Düşük Stabilite</div>
+                </div>
+            </div>
+            
+            <div class="meta">
+                <div class="badge"><svg xmlns="http://www.w3.org/2000/svg" 
+                    width="18" height="18" 
+                    viewBox="0 0 24 24" 
+                    fill="currentColor">
+                <path d="M12 2L14 8L20 10L14 12L12 18L10 12L4 10L10 8Z"/>
+                <path d="M19 14L20 17L23 18L20 19L19 22L18 19L15 18L18 17Z" opacity="0.6"/>
+                <path d="M5 15L6 17L8 18L6 19L5 21L4 19L2 18L4 17Z" opacity="0.6"/>
+                </svg>
+                    Google Gemini</div>
+            </div>
+        </div>
+        <div class="accordion-content">
+            <div class="inner">
+                <div class="info-box low">
+                    <div class="info-icon">
+                        <i class="fa-solid fa-brain"></i>
+                    </div>
+                    <div class="info-content">
+                        <div class="info-title">Düşük Stabilite</div>
+                        <div class="info-text">
+                            Bu prompt aşırı katı “%100 identical” ve yoğun negatif talimat içerir. Modelden yüzü tamamen sabit tutması istenirken aynı zamanda yeni sahne ve poz üretmesi beklenir. Bu katı kısıtlamalar bazı denemelerde photoreal detay eklenmesine veya yüzün hafif değişmesine yol açabilir.</div>
+                    </div>
+                </div>
+                <div class="code" id="p3">
+Use ONLY the uploaded GTA V female character’s ORIGINAL FACE and ORIGINAL HAIR. The character’s face must remain 100% IDENTICAL to the original GTA V face model with absolutely NO changes of any kind. Do NOT modify, beautify, smooth, enhance, replace, reshape, blend, stylize, reinterpret, or alter the face in any way. Do NOT change facial structure, proportions, jawline, nose, lips, eyes, eyebrows, ears, cheekbones, head shape, skull structure, or any facial detail. Keep the exact GTA V skin texture, skin tone, polygon structure, imperfections, roughness, and all in-game facial materials exactly as they are. Do NOT improve skin quality, do NOT remove GTA V graphical artifacts, and do NOT add realism or photorealistic detail. The hair must remain completely unchanged and identical to the original GTA V hair model, including haircut, hairline, length, density, texture, and GTA V hair material. If the character has facial hair, beard, or stubble, it must remain exactly the same with no edits, no enhancements, no reshaping, and no added detail. Do NOT copy, recreate, reference, imitate, or blend the real female's face from the reference image under any circumstances. Do NOT mix facial features, do NOT introduce realistic human elements, and do NOT transfer facial expressions or facial details from the reference man. Everything must remain strictly within the original GTA V graphical style and engine limitations. From the reference female's photo, take ONLY the pose, body posture, outfit, clothing pieces, accessories, and jewelry, and recreate them on the GTA V character while keeping the original GTA V face and hair completely untouched. Do NOT transfer facial expressions or any facial information from the reference image. The final image must look exactly like a real in-game screenshot captured directly inside GTA V using Menyoo, RageMP, or FiveM. Use Rockstar Advanced Game Engine lighting, authentic GTA V shaders, original GTA V textures, GTA V skin materials, and GTA V hair materials. Maintain hard GTA V shadows, visible polygon edges, in-game lighting imperfections, and typical GTA V rendering artifacts. Do NOT use cinematic lighting, Unreal Engine style, ray tracing, hyperrealism, depth-of-field effects, film grain, motion blur, or real-life photography aesthetics. The background environment is EXTREMELY IMPORTANT and must be 100% GTA V–accurate. The scene must take place in a recognizable GTA V world environment such as Los Santos streets, Vespucci Beach, Downtown LS, Mirror Park, a GTA V parking lot, alleyway, highway, or urban neighborhood. Use only GTA V buildings, roads, sidewalks, props, vegetation, skybox, and environmental assets. The background must clearly look like it was rendered inside GTA V, with correct scale, lighting, textures, and world geometry. Do NOT use real-life locations, real-world photography, Unreal-style environments, or generic backgrounds. The environment must fully match GTA V’s in-game map, assets, and visual limitations.
+                </div>
+                <button class="btn" onclick="copyPrompt('p3')"><i class="fa-regular fa-copy"></i> Promptu Kopyala</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- FOUR PROMPT -->
+    <div class="accordion-item">
+        <div class="accordion-header">
+            <div class="title">Sıfır Toleranslı Çevre Yeniden Yaratımı (Global)
+                 <div class="tags">
+                    <div class="tag" style="background-color: rgba(255, 170, 91, 0.15); color: rgb(255, 189, 91);"><i class="fa-solid fa-globe"></i> Global</div>
+                    <div class="tag" style="background-color: rgba(255, 91, 91, 0.15); color: rgb(255, 91, 91);"><i class="fa-solid fa-xmark"></i> Düşük Stabilite</div>
+                </div>
+            </div>
+            
+            <div class="meta">
+                <div class="badge"><svg xmlns="http://www.w3.org/2000/svg" 
+                    width="18" height="18" 
+                    viewBox="0 0 24 24" 
+                    fill="currentColor">
+                <path d="M12 2L14 8L20 10L14 12L12 18L10 12L4 10L10 8Z"/>
+                <path d="M19 14L20 17L23 18L20 19L19 22L18 19L15 18L18 17Z" opacity="0.6"/>
+                <path d="M5 15L6 17L8 18L6 19L5 21L4 19L2 18L4 17Z" opacity="0.6"/>
+                </svg>
+                    Google Gemini</div>
+            </div>
+        </div>
+        <div class="accordion-content">
+            <div class="inner">
+                <div class="info-box low">
+                    <div class="info-icon">
+                        <i class="fa-solid fa-brain"></i>
+                    </div>
+                    <div class="info-content">
+                        <div class="info-title">Düşük Stabilite</div>
+                        <div class="info-text">
+                            <p>Yapılandırılmış ve teknik olarak net olsa da çok fazla engine ve stil kısıtlaması içerir. Model bazı denemelerde photorealistik eğilime kayabilir veya sahneyi fazla sadeleştirebilir. Özellikle “full synthetic recreation” talebi bazı varyasyonlarda tutarsız sonuç üretebilir.</p>
+                        </div>
+                </div>
+                </div>
+                <div class="code" id="p4">
+{    "ABSOLUTE_OVERRIDE_RULE": {      "priority": "HIGHEST",      "instruction": "The uploaded reference image MUST NOT be reused, traced, filtered, color-graded, or partially preserved in any way. Reusing original pixels is a hard failure.",      "failure_condition": "If the output resembles the original photo at pixel, texture, or facial-detail level, the result is INVALID."    },    "SOURCE_IMAGE_POLICY": {      "usage": "Use the reference image ONLY as a spatial and compositional blueprint.",      "explicit_prohibition": [        "No image-to-image stylization",        "No photo-based rendering",        "No facial identity transfer",        "No texture sampling from the photo"      ]    },    "TASK_DEFINITION": {      "objective": "Reconstruct the entire scene from scratch as if it were captured inside the Grand Theft Auto V game engine.",      "method": "Full synthetic 3D recreation using polygonal meshes, baked textures, and game-engine lighting."    },    "STYLE_AND_ENGINE_CONSTRAINTS": {      "engine": "GTA V RAGE Engine (2013–2015 era)",      "visual_identity": [        "Clearly polygonal character models",        "Game-engine skin shaders (slightly waxy, non-photoreal)",        "Repeating environment textures with visible tiling",        "LOD-style geometry simplification"      ],      "strictly_avoid": [        "Photorealism",        "AI-upscaled realism",        "Cinematic CGI renders",        "Photo-like skin pores or cloth fibers"      ]    },    "CHARACTER_RECONSTRUCTION_RULES": {      "identity": "Characters must resemble generic GTA V NPCs or protagonists, NOT the real person.",      "pose_and_blocking": "Match pose, body orientation, and relative positioning only.",      "face_rule": "Faces must look like GTA NPC meshes — simplified topology, not real human likeness."    },    "ENVIRONMENT_TRANSLATION": {      "world": "Los Santos equivalent environment only.",      "object_mapping_examples": {        "smartphone": "in-game iFruit phone prop",        "street": "GTA asphalt texture with decals",        "buildings": "Los Santos modular architecture assets",        "vegetation": "GTA V foliage system"      },      "background_rule": "The background must look like an open-world game map, not a photographed city."    },    "LIGHTING_AND_RENDERING": {      "lighting_model": "Real-time GTA V lighting and shadow system",      "atmosphere": "Subtle in-game haze and distance fog",      "camera": "Standard third-person or free-roam gameplay camera"    },    "OUTPUT_SPECIFICATION": {      "format": "4K in-game screenshot look",      "ui": "NO HUD, NO minimap, NO UI",      "focus": "Gameplay-level sharpness, visible textures, no cinematic blur"    },    "NEGATIVE_PROMPT": [      "Original photo preserved",      "Filtered photograph",      "Same face as reference",      "Hyper-real skin",      "Cinematic movie still",      "AI photo realism",      "Loading screen illustration",      "Concept art painting style"    ]  }
+                </div>
+                <button class="btn" onclick="copyPrompt('p4')"><i class="fa-regular fa-copy"></i> Promptu Kopyala</button>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+<footer>
+    <div class="footer-left">
+        <span>&copy; 2026</span>
+        <span style="opacity: 0.3">|</span>
+        <span>403 Forbibden</span>
+    </div>
+
+    <div class="footer-right">
+        <a href="https://discord.com/users/766277370872070155" class="social-link" title="Discord Sunucusu">
+            <i class="fa-brands fa-discord"></i>
+        </a>
+        <a href="https://github.com/Forbibden" class="social-link" title="GitHub Projesi">
+            <i class="fa-brands fa-github"></i>
+        </a>
+        
+        <span style="opacity: 0.3">|</span>
+        
+        <span class="version-badge">v1.2.0</span>
+    </div>
+</footer>
+
+<script> 
+    const headers = document.querySelectorAll(".accordion-header"); 
+    headers.forEach((header, index) => { header.addEventListener("click", () => { 
+        const content = header.nextElementSibling; 
+        document.querySelectorAll(".accordion-content").forEach(c => { if(c !== content){ c.style.maxHeight = 0; c.classList.remove("open"); } }); if(content.style.maxHeight && content.style.maxHeight !== "0px"){ content.style.maxHeight = 0; content.classList.remove("open"); } else { content.style.maxHeight = (content.scrollHeight + 20) + "px"; content.classList.add("open"); } }); if(index === 0){ const firstContent = header.nextElementSibling; firstContent.style.maxHeight = (firstContent.scrollHeight + 20) + "px"; firstContent.classList.add("open"); } }); 
+        
+        
+        function showToast(message) {
+    const existingToast = document.querySelector('.toast');
+    if (existingToast) {
+        existingToast.remove();
+    }
+
+    const toast = document.createElement('div');
+    toast.className = 'toast';
+    toast.innerHTML = `<i class="fa-solid fa-circle-check" style="color: var(--green); font-size: 18px;"></i> ${message}`;
+    document.body.appendChild(toast);
+
+    setTimeout(() => {
+        toast.classList.add('show');
+    }, 10);
+
+    setTimeout(() => {
+        toast.classList.remove('show');
+        setTimeout(() => toast.remove(), 400); 
+    }, 3000);
+}
+
+function copyPrompt(id) {
+    const text = document.getElementById(id).innerText;
+    
+    navigator.clipboard.writeText(text).then(() => {
+        showToast("Prompt başarıyla kopyalandı!");
+    }).catch(err => {
+        console.error('Kopyalama hatası:', err);
+        showToast("Kopyalama başarısız oldu.");
+    });
+}
+</script>
+
+</body>
+</html>

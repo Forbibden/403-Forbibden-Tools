@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<title>403forbibden</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<link rel="icon" href="/assets/image/favicon.svg" />
+<style>
+:root {
+    --bg-body: #191b1f;
+    --text-main: #e1e3e6;
+    --text-muted: #8a8d91;
+    --accent: #5b89ff;
+    --bg-panel: #202328;
+    --border: rgba(255, 255, 255, 0.1); 
+    --bg-input: rgba(0, 0, 0, 0.2);
+}
+* { box-sizing: border-box; padding: 0; outline: none; }
+
+body {
+    background-color: var(--bg-body);
+    color: var(--text-main);
+    font-family: 'Inter', sans-serif;
+    min-height: 100vh;      
+    display: flex;
+    flex-direction: column;
+    margin: 0;
+}
+
+
+.container{
+    display:flex;
+    flex-direction:column;
+    gap:40px;
+    padding:40px;
+    align-items:center; 
+}
+
+.menu-card{
+    position: relative;
+    width: 70vw;   
+    max-width: 900px; 
+    height: 30vh; 
+    border-radius: 24px;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    color: var(--text-main);
+    font-weight: 700;
+    font-size: 36px;
+    text-align: center;
+    transition: transform 0.25s ease;
+}
+
+.menu-card:hover{
+    transform: scale(1.02);
+}
+
+.menu-card img{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0.3;
+}
+
+.menu-content{
+    position: relative;
+    z-index: 2;
+}
+
+.card-subtitle{
+    font-size: 16px;
+    color: var(--text-muted);
+    font-weight: 400;
+    margin-top: 8px;
+}
+
+.card-ai{
+    background-color: #1e2028;
+}
+
+.card-chat{
+    background-color: #1e2028;
+}
+
+
+.hero{
+    text-align: center;
+    margin-bottom: 60px;
+}
+
+.hero h1{
+    font-size: 48px;
+    font-weight: 700;
+    color: var(--text-main);
+}
+
+.hero h1 span{
+    color: var(--accent);
+}
+
+.hero-subtitle{
+    font-size: 18px;
+    color: var(--text-muted);
+    margin-top: 8px;
+    font-weight: 400;
+}
+
+footer {
+    position: sticky;
+    bottom: 0;
+    width: 100%;
+    height: 40px;
+    background: var(--bg-panel);
+    border-top: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 20px;
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    user-select: none;
+    z-index: 10;
+}
+
+.footer-left, .footer-right {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.social-link {
+    color: var(--text-muted);
+    transition: 0.2s;
+    text-decoration: none;
+    font-size: 1rem;
+    display: flex;
+    align-items: center;
+}
+.version-badge {
+    background: var(--bg-input);
+    padding: 2px 6px;
+    border-radius: 4px;
+    border: 1px solid var(--border);
+    font-size: 0.7rem;
+    font-family: monospace;
+}
+.social-link:hover {
+    color: var(--accent); 
+    transform: translateY(-2px); 
+}
+
+@media (max-width: 768px) {
+    body::before {
+        content: "Bu platform sadece masaüstü deneyimi için tasarlanmıştır. Lütfen bilgisayarınızdan ziyaret edin.";
+        position: fixed;
+        top: 0; left: 0; width: 100%; height: 100%;
+        background: var(--bg-body);
+        color: var(--accent);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        padding: 40px;
+        font-size: 1.2rem;
+        z-index: 9999;
+    }
+    .hero, .container, footer {
+        display: none;
+    }
+}
+</style>
+</head>
+<body>
+<main class="hero">
+    <h1>403 Forbibden<span>.xyz</span></h1>
+    <p class="hero-subtitle">AI Prompt kütüphanesi ve Chatlog görselleştiricisi</p>
+</main>
+<div class="container">
+    <a href="pages/ai-library.html" class="menu-card card-ai">
+        <img src="assets/image/AI.png" alt="AI Prompt">
+        <div class="menu-content">
+            <svg width="30" height="30" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="margin-right: 8px;">
+  <path d="M4 3H18C19.1 3 20 3.9 20 5V19C20 20.1 19.1 21 18 21H4C2.9 21 2 20.1 2 19V5C2 3.9 2.9 3 4 3Z" fill="#262a30" stroke="#e1e3e6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M6 7H18M6 11H18M6 15H12" stroke="#5b89ff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>AI Library
+            <div class="card-subtitle">Test edilmiş ve stabil promptlar.</div>
+        </div>
+    </a>
+
+    <a href="pages/chat-forge.html" class="menu-card card-chat">
+        <img src="assets/image/ChatForge.png" alt="Chatlog">
+        <div class="menu-content">
+            <svg width="30" height="30" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="margin-right: 8px;">
+                <path d="M20 2H4C2.9 2 2 2.9 2 4V22L6 18H20C21.1 18 22 17.1 22 16V4C22 2.9 21.1 2 20 2Z" fill="#262a30" stroke="#e1e3e6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M11 6L14 10H10L13 14" stroke="#5b89ff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>ChatForge
+            <div class="card-subtitle">Kendi sohbet loglarınızı dilediğiniz gibi görselleştirin.</div>
+        </div>
+    </a>
+</div>
+
+<footer>
+    <div class="footer-left">
+        <span>&copy; 2026 </span>
+        <span style="opacity: 0.3">|</span>
+        <span>403 Forbibden</span>
+    </div>
+
+    <div class="footer-right">
+        <a href="https://discord.com/users/766277370872070155" class="social-link" title="Discord Sunucusu">
+            <i class="fa-brands fa-discord"></i>
+        </a>
+        <a href="https://github.com/Forbibden" class="social-link" title="GitHub Projesi">
+            <i class="fa-brands fa-github"></i>
+        </a>
+        
+        <span style="opacity: 0.3">|</span>
+        
+        <span class="version-badge">v1.2.0</span>
+    </div>
+</footer>
+</body>
+</html>
