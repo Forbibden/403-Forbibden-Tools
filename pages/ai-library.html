@@ -7,305 +7,52 @@
 <meta name="description" content="Stable Diffusion, Midjourney ve AI modelleri için test edilmiş, yüksek stabiliteye sahip prompt kütüphanesi.">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 <link rel="icon" href="/assets/image/favicon.svg" />    
-<style>
-:root {
-    --bg-body: #191b1f;
-    --bg-panel: #202328;
-    --bg-soft: #262a30;
-    --text-main: #e1e3e6;
-    --text-muted: #8a8d91;
-    --accent: #5b89ff;
-    --green: #3fb950;
-    --yellow: #d29922;
-    --red: #f85149;
-}
-
-*{margin:0;padding:0;box-sizing:border-box}
-
-body {
-    background: var(--bg-body);
-    color: var(--text-main);
-    font-family: Inter,system-ui,sans-serif;
-    margin: 0;
-    padding: 0;
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-}
-
-
-.header{
-    padding:30px 60px;
-    display:flex;
-    justify-content:space-between;
-}
-
-.logo{
-    font-weight:600;
-    font-size:18px;
-}
-
-.main{
-    flex: 1; 
-    width: 100%; 
-    max-width:900px;
-    margin:60px auto 100px;
-    padding:0 20px;
-}
-
-h1{
-    font-size:32px;
-    margin-bottom:10px;
-}
-
-.subtitle{
-    color:var(--text-muted);
-    margin-bottom:50px;
-}
-
-/* ACCORDION */
-.accordion-item{
-    background:var(--bg-panel);
-    border-radius:14px;
-    margin-bottom:20px;
-    overflow:hidden;
-}
-
-.accordion-header{
-    padding:22px 28px;
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    cursor:pointer;
-}
-
-.accordion-header:hover{
-    background:rgba(255,255,255,0.02);
-}
-
-.accordion-content{
-    max-height: 0;
-    overflow: hidden;
-    transition: max-height 0.4s ease, padding 0.4s ease;
-    background: var(--bg-soft);
-    padding: 0 28px;
-}
-.accordion-content.open {
-    padding: 25px 28px;
-}
-
-.title{
-    font-size:17px;
-    font-weight:500;
-}
-
-.meta{
-    display:flex;
-    gap:15px;
-    align-items:center;
-    font-size:13px;
-}
-
-.badge{
-    display: flex;
-    align-items: center;
-    gap: 5px;
-    background:rgba(91,137,255,0.15);
-    color:var(--accent);
-    padding:6px 10px;
-    border-radius:20px;
-}
-
-.inner{
-    padding:25px 0;
-}
-
-.info{
-    font-size:14px;
-    color:var(--text-muted);
-    margin-bottom:20px;
-}
-
-.info-box{
-    display:flex;
-    gap:14px;
-    padding:16px 18px;
-    border-radius:12px;
-    margin-bottom:20px;
-    background:rgba(91,137,255,0.08);
-    border:1px solid rgba(91,137,255,0.15);
-}
-
-.info-icon{
-    width:32px;
-    height:32px;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    border-radius:50%;
-    background:rgba(91,137,255,0.15);
-    color:var(--accent);
-    font-size:14px;
-    flex-shrink:0;
-}
-
-.info-title{
-    font-size:13px;
-    font-weight:600;
-    margin-bottom:4px;
-}
-
-.info-text{
-    font-size:13px;
-    color:var(--text-muted);
-    line-height:1.6;
-}
-
-.info-box.low{
-    background:rgba(248,81,73,0.08);
-    border:1px solid rgba(248,81,73,0.15);
-}
-
-.info-box.low .info-icon{
-    background:rgba(248,81,73,0.15);
-    color:var(--red);
-}
-
-.code{
-    background:#1a1c20;
-    padding:20px;
-    border-radius:10px;
-    font-family:monospace;
-    font-size:13px;
-    line-height:1.6;
-    white-space:pre-wrap;
-    margin-bottom:20px;
-}
-
-.btn {
-    padding: 10px 18px;
-    border-radius: 8px;
-    background: var(--accent);
-    border: none;
-    color: #fff;
-    cursor: pointer;
-    display: inline-flex; 
-    align-items: center;
-    gap: 8px; 
-    margin-bottom: 10px; 
-}
-
-footer {
-    height: 40px;
-    background: var(--bg-panel);
-    border-top: 1px solid var(--border);
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 0 20px;
-    font-size: 0.8rem;
-    color: var(--text-muted);
-    user-select: none;
-    flex-shrink: 0;
-}
-
-.version-badge {
-    background: var(--bg-input);
-    padding: 2px 6px;
-    border-radius: 4px;
-    border: 1px solid var(--border);
-    font-size: 0.7rem;
-    font-family: monospace;
-}
-
-.footer-left, .footer-right {
-    display: flex;
-    align-items: center;
-    gap: 15px;
-}
-
-.social-link {
-    color: var(--text-muted);
-    transition: 0.2s;
-    text-decoration: none;
-    font-size: 1rem;
-    display: flex;
-    align-items: center;
-}
-
-.social-link:hover {
-    color: var(--accent); 
-    transform: translateY(-2px); 
-}
-
-.tags{
-    display:flex;
-    gap:8px;
-    margin-top: 5px;
-}
-
-.tag{
-    font-size:12px;
-    padding:2px 5px;
-    border-radius:20px;
-    background:rgba(255,255,255,0.04);
-    border:1px solid rgba(255,255,255,0.05);
-}
-
-.disclaimer{
-    background: rgba(255, 170, 91, 0.1);
-    border: 1px solid rgba(255, 170, 91, 0.25);
-    color: var(--text-main);
-    padding: 15px 20px;
-    border-radius: 5px;
-    font-size: 13px;
-    margin: 40px 0;
-    text-align: center;
-    line-height: 1.5;
-}
-
-
-.toast {
-    position: fixed;
-    bottom: 50px;
-    right: 30px;
-    background: var(--bg-panel);
-    color: var(--text-main);
-    padding: 14px 24px;
-    border-radius: 10px;
-    border-left: 4px solid var(--green); 
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    font-size: 14px;
-    font-weight: 500;
-    z-index: 9999;
-    transform: translateX(150%); 
-    transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); 
-}
-
-.toast.show {
-    transform: translateX(0); 
-}
-</style>
+<link rel="stylesheet" href="/style.css">
 </head>
 <body>
 
-<div class="header">
-  <a href="../index.html" class="logo" style="display: flex; align-items: center; gap: 8px; text-decoration: none; color: inherit;">
-    <svg width="30" height="30" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <path d="M4 3H18C19.1 3 20 3.9 20 5V19C20 20.1 19.1 21 18 21H4C2.9 21 2 20.1 2 19V5C2 3.9 2.9 3 4 3Z" fill="#262a30" stroke="#e1e3e6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-      <path d="M6 7H18M6 11H18M6 15H12" stroke="#5b89ff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-    </svg>
-    AI Library
-</a>
-</div>
+<nav class="navbar">
+    <div class="logo-area">
+        <div class="tool-name">
+            <div class="logo-icon"><i class="fa-solid fa-bolt"></i></div>
+            PromptHub
+        </div>
+    </div>
+    
+    <div class="nav-links">
+        <a href="/index.html" class="nav-link home">
+            <img src="/assets/image/favicon.svg" alt="Forbibden" class="parent-logo">
+            <span class="parent-text">Forbibden.<strong style="color: var(--accent);">xyz</strong></span>
+        </a>
+        <div class="dropdown">
+            <a href="#" class="nav-link">
+                <i class="fa-solid fa-cubes"></i> Diğer Araçlar 
+                <i class="fa-solid fa-chevron-down" style="font-size: 10px; margin-left: 4px; opacity: 0.7;"></i>
+            </a>
+            
+            <div class="dropdown-menu">
+                <a href="#" class="dropdown-item">
+                    <div class="dropdown-icon">
+                         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M20 2H4C2.9 2 2 2.9 2 4V22L6 18H20C21.1 18 22 17.1 22 16V4C22 2.9 21.1 2 20 2Z" fill="white" stroke="white" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M11 6L14 10H10L13 14" stroke="var(--bg-panel)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </div>
+                    <div class="dropdown-text">
+                        <span class="dropdown-title">ChatForge</span>
+                        <span class="dropdown-desc">Kendi sohbet loglarınızı dilediğiniz gibi görselleştirin.</span>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+</nav>
 
 <div class="main">
 
     <div class="disclaimer">
-    <p><i class="fa-solid fa-triangle-exclamation" style="color: #d29922;"></i> Bu web sitesindeki promptlar <strong> 403forbibden tarafından oluşturulmamıştır. </strong>  Promptlar, Discord, forumlar ve diğer herkese açık kaynaklarda paylaşılan içeriklerden derlenmiştir. Telif hakkı ilgili sahibine aittir.</p>
+        <i class="fa-solid fa-triangle-exclamation" style="color: var(--warning); font-size: 20px;"></i>
+        <div>Bu kütüphanedeki promptlar açık kaynaklardan derlenmiştir. Telif hakkı ilgili sahibine aittir.</div>
     </div>
 
     <!-- STABLE PROMPT (AUTO OPEN) -->
@@ -486,20 +233,24 @@ Use ONLY the uploaded GTA V female character’s ORIGINAL FACE and ORIGINAL HAIR
     <div class="footer-left">
         <span>&copy; 2026</span>
         <span style="opacity: 0.3">|</span>
-        <span>403 Forbibden</span>
+        <a href="https://forbibden.xyz" class="footer-brand">Forbibden</a>
+        <span style="opacity: 0.3" class="hide-mobile">|</span>
+        <span class="hide-mobile">PromptHub</span>
     </div>
 
     <div class="footer-right">
-        <a href="https://discord.com/users/766277370872070155" class="social-link" title="Discord Sunucusu">
-            <i class="fa-brands fa-discord"></i>
-        </a>
-        <a href="https://github.com/Forbibden" class="social-link" title="GitHub Projesi">
-            <i class="fa-brands fa-github"></i>
-        </a>
+        <div class="social-links">
+            <a href="https://discord.com/users/766277370872070155" class="social-link" title="Discord Sunucusu">
+                <i class="fa-brands fa-discord"></i>
+            </a>
+            <a href="https://github.com/Forbibden" class="social-link" title="GitHub Projesi">
+                <i class="fa-brands fa-github"></i>
+            </a>
+        </div>
         
-        <span style="opacity: 0.3">|</span>
+        <span style="opacity: 0.3" class="hide-mobile">|</span>
         
-        <span class="version-badge">v1.2.0</span>
+        <span class="version-badge">v1.3.0</span>
     </div>
 </footer>
 
@@ -510,32 +261,41 @@ Use ONLY the uploaded GTA V female character’s ORIGINAL FACE and ORIGINAL HAIR
         document.querySelectorAll(".accordion-content").forEach(c => { if(c !== content){ c.style.maxHeight = 0; c.classList.remove("open"); } }); if(content.style.maxHeight && content.style.maxHeight !== "0px"){ content.style.maxHeight = 0; content.classList.remove("open"); } else { content.style.maxHeight = (content.scrollHeight + 20) + "px"; content.classList.add("open"); } }); if(index === 0){ const firstContent = header.nextElementSibling; firstContent.style.maxHeight = (firstContent.scrollHeight + 20) + "px"; firstContent.classList.add("open"); } }); 
         
         
-        function showToast(message) {
-    const existingToast = document.querySelector('.toast');
-    if (existingToast) {
-        existingToast.remove();
+    function showToast(message) {
+        const existingToast = document.querySelector('.toast');
+        if (existingToast) {
+            existingToast.remove();
+        }
+
+        const toast = document.createElement('div');
+        toast.className = 'toast';
+        
+        toast.innerHTML = `
+            <div style="display: flex; align-items: center; justify-content: center; width: 26px; height: 26px; border-radius: 50%; background: rgba(63, 185, 80, 0.15); flex-shrink: 0;">
+                <i class="fa-solid fa-check" style="color: var(--green); font-size: 14px;"></i>
+            </div>
+            <span style="letter-spacing: 0.3px;">${message}</span>
+        `;
+        
+        document.body.appendChild(toast);
+
+        setTimeout(() => {
+            toast.classList.add('show');
+        }, 10);
+
+        setTimeout(() => {
+            toast.classList.remove('show');
+            setTimeout(() => toast.remove(), 400); 
+        }, 3000);
     }
 
-    const toast = document.createElement('div');
-    toast.className = 'toast';
-    toast.innerHTML = `<i class="fa-solid fa-circle-check" style="color: var(--green); font-size: 18px;"></i> ${message}`;
-    document.body.appendChild(toast);
-
-    setTimeout(() => {
-        toast.classList.add('show');
-    }, 10);
-
-    setTimeout(() => {
-        toast.classList.remove('show');
-        setTimeout(() => toast.remove(), 400); 
-    }, 3000);
-}
 
 function copyPrompt(id) {
     const text = document.getElementById(id).innerText;
     
     navigator.clipboard.writeText(text).then(() => {
         showToast("Prompt başarıyla kopyalandı!");
+        text.innerText = 'Kopyalandı';
     }).catch(err => {
         console.error('Kopyalama hatası:', err);
         showToast("Kopyalama başarısız oldu.");

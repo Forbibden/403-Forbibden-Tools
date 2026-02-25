@@ -1,0 +1,208 @@
+/* =========================================
+   403 FORBIBDEN | GLOBAL CSS (TÜM SAYFALAR)
+   ========================================= */
+
+:root {
+
+    --bg-body: #050505;
+    --bg-panel: #0d0d0d;
+    --bg-soft: #161616;
+    --bg-code: #000000;
+    --bg-input: rgba(0, 0, 0, 0.4);
+
+    --border: #222222;
+    --border-hover: #333333;
+
+    --text-main: #ededed;
+    --text-muted: #888888;
+
+    --accent: #5b89ff;
+    --green: #3fb950;
+    --yellow: #d29922;
+    --red: #f85149;
+    --warning: #f59e0b;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    outline: none;
+}
+
+body {
+    background-color: var(--bg-body);
+    color: var(--text-main);
+    font-family: 'Inter', system-ui, sans-serif;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* --- BUTONLAR --- */
+.btn {
+    background: var(--bg-input);
+    border: 1px solid var(--border);
+    color: var(--text-main);
+    padding: 8px 16px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 14px;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: all 0.2s ease;
+    text-decoration: none;
+}
+.btn:hover { background: var(--bg-soft); border-color: var(--border-hover); }
+.btn.primary { background: var(--accent); color: white; border: none; }
+.btn.primary:hover { background: #4a72d6; }
+
+/* =========================================
+   1. NAVBAR VE AÇILIR MENÜ (DROPDOWN)
+   ========================================= */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 60px;
+    background: rgba(13, 13, 13, 0.85);
+    border-bottom: 1px solid var(--border);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+}
+.logo-area { display: flex; align-items: center; gap: 10px; font-size: 20px; font-weight: 700; color: white; text-decoration: none; letter-spacing: -0.5px; transition: opacity 0.2s ease; }
+.logo-area:hover { opacity: 0.8; }
+.parent-brand { display: flex; align-items: center; gap: 8px; font-size: 14px; font-weight: 500; color: var(--text-muted); transition: all 0.2s ease; text-decoration: none; }
+.parent-brand:hover { color: var(--text-main); opacity: 0.8; }
+.parent-logo { width: 24px; height: 24px; object-fit: contain; border-radius: 4px; }
+.parent-text { letter-spacing: -0.5px; }
+.divider { color: var(--border-hover); font-weight: 300; margin: 0 4px; }
+.tool-name { font-weight: 700; color: #fff; display: flex; align-items: center; gap: 8px; font-size: 20px; }
+.logo-icon { background: var(--accent); color: #fff; width: 32px; height: 32px; display: flex; align-items: center; justify-content: center; border-radius: 8px; font-size: 16px; box-shadow: 0 4px 12px rgba(91, 137, 255, 0.2); }
+
+.nav-links { display: flex; gap: 10px; align-items: center; }
+.nav-link { color: var(--text-muted); text-decoration: none; font-size: 14px; font-weight: 500; display: flex; align-items: center; gap: 8px; padding: 8px 14px; border-radius: 8px; transition: all 0.2s ease; }
+.nav-link:hover, .nav-link.home { color: var(--text-main); background: rgba(255, 255, 255, 0.04); }
+.nav-link.home:hover { background: rgba(91, 137, 255, 0.1); }
+.nav-link.outline-btn { border: 1px solid var(--border); margin-left: 10px; }
+.nav-link.outline-btn:hover { border-color: var(--border-hover); background: var(--bg-soft); color: var(--text-main); }
+
+.dropdown { position: relative; display: flex; align-items: center; }
+.dropdown-menu { position: absolute; top: 100%; right: 0; transform: translateY(15px); background: var(--bg-panel); border: 1px solid var(--border); border-radius: 12px; padding: 8px; min-width: 280px; box-shadow: 0 12px 30px rgba(0, 0, 0, 0.5); opacity: 0; visibility: hidden; transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); z-index: 1000; display: flex; flex-direction: column; gap: 4px; }
+.dropdown:hover .dropdown-menu { opacity: 1; visibility: visible; transform: translateY(10px); }
+.dropdown-item { display: flex; align-items: center; gap: 14px; padding: 12px; text-decoration: none; border-radius: 8px; color: var(--text-main); transition: background 0.2s ease; }
+.dropdown-item:hover { background: rgba(255, 255, 255, 0.04); }
+.dropdown-icon { width: 36px; height: 36px; background: var(--bg-soft); border: 1px solid var(--border); border-radius: 8px; display: flex; align-items: center; justify-content: center; color: var(--text-muted); font-size: 16px; flex-shrink: 0; transition: all 0.2s ease; }
+.dropdown-item:hover .icon-blue { color: var(--accent); border-color: rgba(91, 137, 255, 0.3); background: rgba(91, 137, 255, 0.1); }
+.dropdown-item:hover .icon-green { color: var(--green); border-color: rgba(63, 185, 80, 0.3); background: rgba(63, 185, 80, 0.1); }
+.dropdown-text { display: flex; flex-direction: column; }
+.dropdown-title { font-size: 14px; font-weight: 600; }
+.dropdown-desc { font-size: 12px; color: var(--text-muted); margin-top: 4px; line-height: 1.4; }
+
+/* =========================================
+   2. ANA SAYFA (HUB) TASARIMI
+   ========================================= */
+.hero { text-align: center; margin-top: 60px; margin-bottom: 20px; }
+.hero h1 { font-size: 48px; font-weight: 700; color: var(--text-main); }
+.hero h1 span { color: var(--accent); }
+.hero-subtitle { font-size: 18px; color: var(--text-muted); margin-top: 8px; font-weight: 400; }
+
+.container { display: flex; flex-direction: column; justify-content: center; gap: 40px; padding: 40px; align-items: center; flex: 1; }
+.menu-card { position: relative; width: 70vw; max-width: 900px; height: 30vh; border-radius: 24px; overflow: hidden; display: flex; align-items: center; justify-content: center; text-decoration: none; color: var(--text-main); font-weight: 700; font-size: 36px; text-align: center; transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease; background-color: var(--bg-panel); border: 1px solid var(--border); }
+.menu-card:hover { transform: translateY(-4px) scale(1.01); border-color: rgba(91, 137, 255, 0.4); box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6); }
+.menu-card img { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0.2; }
+.menu-content { position: relative; z-index: 2; }
+.card-logo-area { display: flex; align-items: center; justify-content: center; gap: 12px; font-size: 26px; font-weight: 700; color: white; letter-spacing: -0.5px; }
+.card-icon { background: var(--accent); color: #fff; width: 36px; height: 36px; display: flex; align-items: center; justify-content: center; border-radius: 8px; font-size: 18px; }
+.card-subtitle { font-size: 16px; color: var(--text-muted); font-weight: 400; margin-top: 8px; }
+
+/* =========================================
+   3. PROMPTHUB (KÜTÜPHANE) TASARIMI
+   ========================================= */
+.main { flex: 1; width: 100%; max-width: 900px; margin: 60px auto 100px; padding: 0 20px; }
+.main h1 { font-size: 32px; margin-bottom: 10px; }
+.subtitle { color: var(--text-muted); margin-bottom: 50px; }
+
+.accordion-item { background: var(--bg-panel); border-radius: 14px; margin-bottom: 20px; overflow: hidden; }
+.accordion-header { padding: 22px 28px; display: flex; justify-content: space-between; align-items: center; cursor: pointer; }
+.accordion-header:hover { background: rgba(255, 255, 255, 0.02); }
+.accordion-content { max-height: 0; overflow: hidden; transition: max-height 0.4s ease, padding 0.4s ease; background: var(--bg-soft); padding: 0 28px; }
+.accordion-content.open { padding: 25px 28px; }
+
+.title { font-size: 17px; font-weight: 500; }
+.meta { display: flex; gap: 15px; align-items: center; font-size: 13px; }
+.badge { display: flex; align-items: center; gap: 5px; background: rgba(91, 137, 255, 0.15); color: var(--accent); padding: 6px 10px; border-radius: 20px; }
+.inner { padding: 25px 0; }
+.info { font-size: 14px; color: var(--text-muted); margin-bottom: 20px; }
+
+.info-box { display: flex; gap: 14px; padding: 16px 18px; border-radius: 12px; margin-bottom: 20px; background: rgba(91, 137, 255, 0.08); border: 1px solid rgba(91, 137, 255, 0.15); }
+.info-icon { width: 32px; height: 32px; display: flex; align-items: center; justify-content: center; border-radius: 50%; background: rgba(91, 137, 255, 0.15); color: var(--accent); font-size: 14px; flex-shrink: 0; }
+.info-title { font-size: 13px; font-weight: 600; margin-bottom: 4px; }
+.info-text { font-size: 13px; color: var(--text-muted); line-height: 1.6; }
+.info-box.low { background: rgba(248, 81, 73, 0.08); border: 1px solid rgba(248, 81, 73, 0.15); }
+.info-box.low .info-icon { background: rgba(248, 81, 73, 0.15); color: var(--red); }
+
+.code { background: var(--bg-code); padding: 20px; border-radius: 10px; font-family: monospace; font-size: 13px; line-height: 1.6; white-space: pre-wrap; margin-bottom: 20px; }
+.tags { display: flex; gap: 8px; margin-top: 5px; }
+.tag { font-size: 12px; padding: 2px 5px; border-radius: 20px; background: rgba(255, 255, 255, 0.04); border: 1px solid rgba(255, 255, 255, 0.05); }
+.disclaimer { background: rgba(245, 158, 11, 0.05); border: 1px dashed var(--warning); padding: 16px 24px; border-radius: 8px; color: var(--text-muted); font-size: 14px; margin-bottom: 40px; display: flex; align-items: center; gap: 16px; }
+
+/* =========================================
+   4. CHATFORGE (EDİTÖR) TASARIMI
+   ========================================= */
+.layout { display: flex; height: calc(100vh - 63px); overflow: hidden; } /* Navbar yüksekliği düşülerek tam ekran yapıldı */
+.editor-pane { width: 40%; min-width: 350px; background: var(--bg-body); border-right: 1px solid var(--border); display: flex; flex-direction: column; padding: 20px; overflow-y: auto; }
+.toolbar { display: flex; gap: 8px; margin-bottom: 15px; flex-wrap: wrap; align-items: center; }
+
+.color-palette-container { display: flex; align-items: center; gap: 4px; background: var(--bg-input); padding: 5px 10px; border-radius: 20px; border: 1px solid var(--border); margin-left: auto; box-shadow: inset 0 2px 4px rgba(0,0,0,0.2); }
+.color-palette { display: flex; gap: 4px; flex-wrap: wrap; }
+.color-btn { width: 20px; height: 20px; border-radius: 50%; cursor: pointer; border: 2px solid rgba(30, 30, 30, 0.5); transition: all 0.25s cubic-bezier(0.34, 1.56, 0.64, 1); position: relative; }
+.color-btn:hover { transform: scale(1.25) translateY(-2px); border-color: white; box-shadow: 0 5px 10px rgba(0,0,0,0.3); z-index: 2; }
+
+.chip { background: var(--bg-input); padding: 4px 10px; border-radius: 15px; font-size: 0.75rem; color: var(--text-muted); cursor: pointer; border: 1px solid transparent; display: flex; align-items: center; gap: 5px; transition: 0.2s ease; }
+.chip:hover { border-color: var(--text-muted); color: white; }
+
+textarea { flex: 1; background: transparent; border: none; resize: none; color: var(--text-main); font-size: 14px; line-height: 1.5; font-family: 'Inter', sans-serif; margin-top: 10px; padding: 10px 0; }
+.settings-bar { display: flex; gap: 15px; padding-top: 15px; border-top: 1px solid var(--border); font-size: 0.8rem; color: var(--text-muted); align-items: center; margin-top: auto; }
+input[type="number"] { background: var(--bg-input); border: 1px solid var(--border); color: white; padding: 4px 8px; width: 50px; border-radius: 4px; }
+
+.preview-pane { flex: 1; background: #111; background-image: linear-gradient(45deg, #151515 25%, transparent 25%), linear-gradient(-45deg, #151515 25%, transparent 25%), linear-gradient(45deg, transparent 75%, #151515 75%), linear-gradient(-45deg, transparent 75%, #151515 75%); background-size: 20px 20px; background-position: 0 0, 0 10px, 10px -10px, -10px 0px; display: flex; justify-content: center; align-items: flex-start; overflow-y: auto; padding: 40px; }
+.canvas-wrapper { box-shadow: 0 0 30px rgba(0,0,0,0.8); }
+canvas { display: block; }
+
+/* =========================================
+   5. BİLDİRİMLER (TOAST)
+   ========================================= */
+#toast-box { position: fixed; bottom: 40px; right: 40px; z-index: 9999; display: flex; flex-direction: column; gap: 10px; }
+.toast { background: rgba(13, 13, 13, 0.85); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); color: var(--text-main); padding: 16px 24px; border-radius: 12px; border: 1px solid var(--border); border-left: 4px solid var(--green); box-shadow: 0 6px 15px rgba(0, 0, 0, 0.4); display: flex; align-items: center; gap: 14px; font-size: 14px; font-weight: 500; opacity: 0; transform: translateY(20px) scale(0.95); transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
+.toast.show { opacity: 1; transform: translateY(0) scale(1); }
+
+/* =========================================
+   6. FOOTER
+   ========================================= */
+footer { min-height: 50px; background: var(--bg-panel); border-top: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; padding: 0 60px; font-size: 13px; color: var(--text-muted); user-select: none; flex-shrink: 0; margin-top: auto; }
+.footer-left, .footer-right { display: flex; align-items: center; gap: 15px; }
+.footer-brand { color: var(--text-main); text-decoration: none; font-weight: 500; transition: color 0.2s ease; }
+.footer-brand:hover { color: var(--accent); }
+.social-links { display: flex; gap: 12px; }
+.social-link { color: var(--text-muted); transition: all 0.2s ease; text-decoration: none; font-size: 16px; display: flex; align-items: center; }
+.social-link:hover { color: #fff; transform: translateY(-2px); }
+.version-badge { background: rgba(255, 255, 255, 0.04); padding: 4px 8px; border-radius: 6px; border: 1px solid var(--border); font-size: 11px; font-family: monospace; letter-spacing: 0.5px; }
+
+/* =========================================
+   7. MOBİL UYUM (RESPONSIVE)
+   ========================================= */
+@media (max-width: 768px) {
+    body::before {
+        content: "Bu platform sadece masaüstü deneyimi için tasarlanmıştır. Lütfen bilgisayarınızdan ziyaret edin.";
+        position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+        background: var(--bg-body); color: var(--accent);
+        display: flex; align-items: center; justify-content: center;
+        text-align: center; padding: 40px; font-size: 1.2rem; z-index: 9999;
+    }
+    .hero, .container, footer, .navbar, .main, .layout { display: none; }
+}
