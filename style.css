@@ -206,3 +206,18 @@ footer { min-height: 50px; background: var(--bg-panel); border-top: 1px solid va
     }
     .hero, .container, footer, .navbar, .main, .layout { display: none; }
 }
+
+
+/* =========================================
+   SCROLLBAR (KAYDIRMA ÇUBUĞU) TASARIMI
+   ========================================= */
+
+html {scrollbar-width: thin;scrollbar-color: var(--border-hover) var(--bg-body);}
+
+::-webkit-scrollbar {width: 10px; height: 10px;}
+
+::-webkit-scrollbar-track {background: var(--bg-body); }
+
+::-webkit-scrollbar-thumb {background-color: var(--border-hover);border-radius: 10px;border: 2px solid var(--bg-body); transition: background-color 0.3s ease;}
+
+::-webkit-scrollbar-thumb:hover {background-color: var(--text-muted); }
