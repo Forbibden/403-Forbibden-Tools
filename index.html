@@ -1,107 +1,130 @@
 <!DOCTYPE html>
 <html lang="tr">
+
 <head>
-<meta charset="UTF-8">
-<title>403forbibden</title>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-<link rel="icon" href="/assets/image/favicon.svg" />
-<link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <title>403forbibden</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link rel="icon" href="/assets/image/favicon.svg" />
+    <link rel="stylesheet" href="style.css">
 
 </head>
+
 <body>
 
-<nav class="navbar">
-    <a href="/index.html" class="logo-area">
-        <img src="/assets/image/favicon.svg" alt="Forbibden" class="parent-logo">
-        <span class="parent-text">Forbibden.<span style="color: var(--accent);">xyz</span></span>
-    </a>
-    
-    <div class="nav-links">
-        <div class="dropdown">
-            <a href="#" class="nav-link">
-                <i class="fa-solid fa-cubes"></i> Araçlarımız 
-                <i class="fa-solid fa-chevron-down" style="font-size: 10px; margin-left: 4px; opacity: 0.7;"></i>
-            </a>
-            
-            <div class="dropdown-menu">
-                <a href="pages/ai-library.html" class="dropdown-item">
-                    <div class="dropdown-icon icon-blue"><i class="fa-solid fa-bolt"></i></div>
-                    <div class="dropdown-text">
-                        <span class="dropdown-title">PromptHub</span>
-                        <span class="dropdown-desc">Stabil prompt kütüphanesi.</span>
-                    </div>
+    <nav class="navbar">
+        <a href="/index.html" class="logo-area">
+            <img src="/assets/image/favicon.svg" alt="Forbibden" class="parent-logo">
+            <span class="parent-text">Forbibden.<span style="color: var(--accent);">xyz</span></span>
+        </a>
+
+        <div class="nav-links">
+            <div class="dropdown">
+                <a href="#" class="nav-link">
+                    <i class="fa-solid fa-cubes"></i> Araçlarımız
+                    <i class="fa-solid fa-chevron-down" style="font-size: 10px; margin-left: 4px; opacity: 0.7;"></i>
                 </a>
-                
-                <a href="pages/chat-forge.html" class="dropdown-item">
-                    <div class="dropdown-icon icon-green">
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M20 2H4C2.9 2 2 2.9 2 4V22L6 18H20C21.1 18 22 17.1 22 16V4C22 2.9 21.1 2 20 2Z" fill="currentColor" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
-                            <path d="M11 6L14 10H10L13 14" stroke="var(--bg-panel)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+
+                <div class="dropdown-menu">
+                    <a href="pages/ai-library.html" class="dropdown-item">
+                        <div class="dropdown-icon icon-blue"><i class="fa-solid fa-bolt"></i></div>
+                        <div class="dropdown-text">
+                            <span class="dropdown-title">PromptHub</span>
+                            <span class="dropdown-desc">Stabil prompt kütüphanesi.</span>
+                        </div>
+                    </a>
+
+                    <a href="pages/chat-forge.html" class="dropdown-item">
+                        <div class="dropdown-icon icon-green">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path d="M20 2H4C2.9 2 2 2.9 2 4V22L6 18H20C21.1 18 22 17.1 22 16V4C22 2.9 21.1 2 20 2Z"
+                                    fill="currentColor" stroke="currentColor" stroke-width="1" stroke-linecap="round"
+                                    stroke-linejoin="round" />
+                                <path d="M11 6L14 10H10L13 14" stroke="var(--bg-panel)" stroke-width="2"
+                                    stroke-linecap="round" stroke-linejoin="round" />
+                            </svg>
+                        </div>
+                        <div class="dropdown-text">
+                            <span class="dropdown-title">ChatForge</span>
+                            <span class="dropdown-desc">Sohbet loglarınızı düzenleyin ve RP SS oluşturun.</span>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="hero">
+        <div class="hero-badge">
+            <i class="fa-solid fa-sparkles"></i> V1.3.0 Yayında
+        </div>
+        <h1>Yaratıcılığınızı <span>Hızlandırın</span></h1>
+        <div class="hero-subtitle">
+            İhtiyacınız olan her şey tek bir merkezde.
+        </div>
+        <div class="hero-actions">
+            <a href="pages/ai-library.html" class="btn primary">
+                <i class="fa-solid fa-bolt"></i> PromptHub'ı Keşfet
+            </a>
+        </div>
+    </div>
+
+    <div class="container">
+        <a href="pages/ai-library.html" class="menu-card card-ai">
+            <img src="assets/image/AIYeni.png" alt="AI Prompt">
+            <div class="menu-content">
+                <div class="card-logo-area">
+                    <div class="card-icon"><i class="fa-solid fa-bolt"></i></div>
+                    PromptHub
+                </div>
+                <div class="card-subtitle">Stable Diffusion, Midjourney ve diğer modeller için detaylıca test edilmiş,
+                    %100 stabil prompt arşivi.</div>
+            </div>
+        </a>
+
+        <a href="pages/chat-forge.html" class="menu-card card-chat">
+            <img src="assets/image/ChatYeni.png" alt="Chatlog">
+            <div class="menu-content">
+                <div class="card-logo-area">
+                    <div class="card-icon">
+                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M20 2H4C2.9 2 2 2.9 2 4V22L6 18H20C21.1 18 22 17.1 22 16V4C22 2.9 21.1 2 20 2Z"
+                                fill="currentColor" stroke="currentColor" stroke-width="1" stroke-linecap="round"
+                                stroke-linejoin="round" />
+                            <path d="M11 6L14 10H10L13 14" stroke="var(--bg-panel)" stroke-width="2"
+                                stroke-linecap="round" stroke-linejoin="round" />
                         </svg>
                     </div>
-                    <div class="dropdown-text">
-                        <span class="dropdown-title">ChatForge</span>
-                        <span class="dropdown-desc">Sohbet loglarınızı görselleştirin.</span>
-                    </div>
-                </a>
+                    ChatForge
+                </div>
+                <div class="card-subtitle">Sunucu sohbet loglarınızı düzenleyin, temizleyin ve profesyonel RP (Roleplay)
+                    ekran görüntüleri (SS) oluşturun.</div>
             </div>
-        </div>
-        
-        <a href="https://github.com/Forbibden" target="_blank" class="nav-link outline-btn">
-            <i class="fa-brands fa-github"></i> GitHub
         </a>
     </div>
-</nav>
 
-<div class="container">
-    <a href="pages/ai-library.html" class="menu-card card-ai">
-        <img src="assets/image/AIYeni.png" alt="AI Prompt">
-        <div class="menu-content">
-            <div class="card-logo-area">
-                <div class="card-icon"><i class="fa-solid fa-bolt"></i></div>
-                PromptHub
+    <footer>
+        <div class="footer-left">
+            <a href="/index.html" class="footer-brand">403 Forbibden</a>
+            <span style="opacity: 0.2">|</span>
+            <span>&copy; 2026</span>
+        </div>
+
+        <div class="footer-right">
+            <div class="social-links">
+                <a href="https://discord.com/users/766277370872070155" class="social-link" title="Discord"
+                    target="_blank">
+                    <i class="fa-brands fa-discord"></i>
+                </a>
+                <a href="https://github.com/Forbibden" class="social-link" title="GitHub" target="_blank">
+                    <i class="fa-brands fa-github"></i>
+                </a>
             </div>
-            <div class="card-subtitle">Test edilmiş ve stabil promptlar.</div>
+            <span class="version-badge">v1.3.0</span>
         </div>
-    </a>
-
-    <a href="pages/chat-forge.html" class="menu-card card-chat">
-        <img src="assets/image/ChatYeni.png" alt="Chatlog">
-        <div class="menu-content">
-            <div class="card-logo-area">
-                <div class="card-icon" style="background: var(--green);">
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M20 2H4C2.9 2 2 2.9 2 4V22L6 18H20C21.1 18 22 17.1 22 16V4C22 2.9 21.1 2 20 2Z" fill="white" stroke="white" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
-                        <path d="M11 6L14 10H10L13 14" stroke="var(--bg-panel)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                    </svg>
-                </div>
-                ChatForge
-            </div>
-            <div class="card-subtitle">Kendi sohbet loglarınızı dilediğiniz gibi görselleştirin.</div>
-        </div>
-    </a>
-</div>
-
-<footer>
-    <div class="footer-left">
-        <span>&copy; 2026</span>
-        <span style="opacity: 0.3">|</span>
-        <a href="/index.html" class="footer-brand">Forbibden.xyz</a>
-    </div>
-
-    <div class="footer-right">
-        <div class="social-links">
-            <a href="https://discord.com/users/766277370872070155" class="social-link" title="Discord Sunucusu">
-                <i class="fa-brands fa-discord"></i>
-            </a>
-            <a href="https://github.com/Forbibden" class="social-link" title="GitHub Projesi">
-                <i class="fa-brands fa-github"></i>
-            </a>
-        </div>
-        <span style="opacity: 0.3" class="hide-mobile">|</span>
-        <span class="version-badge">v1.3.0</span>
-    </div>
-</footer>
+    </footer>
 
 </body>
+
 </html>

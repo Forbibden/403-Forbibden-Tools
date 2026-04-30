@@ -1,28 +1,31 @@
 <!DOCTYPE html>
 <html lang="tr">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ChatForge | 403 Forbibden</title>
-    <meta name="description" content="Test edilmiş AI prompt kütüphanesi ve kişiselleştirilebilir Chatlog görselleştirme aracı.">
-    
+    <meta name="description"
+        content="Sohbet loglarınızı düzenleyin, temizleyin ve profesyonel RP (Roleplay) ekran görüntüleri (SS) oluşturun.">
+
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="icon" href="/assets/image/favicon.svg" />
-    
+
     <link rel="stylesheet" href="/style.css">
 
     <style>
         body {
             height: 100vh;
-            overflow: hidden; 
+            overflow: hidden;
         }
 
         .layout {
-            flex: 1; 
+            flex: 1;
             display: flex;
             overflow: hidden;
         }
+
         .header-input {
             background: transparent;
             border: none;
@@ -35,33 +38,51 @@
             transition: all 0.2s ease;
             width: 150px;
         }
+
         .header-input:focus {
             border-bottom-color: var(--accent);
-            width: 180px; 
+            width: 180px;
         }
-        ::-webkit-scrollbar { width: 8px; }
-        ::-webkit-scrollbar-track { background: var(--bg-panel); }
-        ::-webkit-scrollbar-thumb { background: var(--border-hover); border-radius: 10px; }
-        ::-webkit-scrollbar-thumb:hover { background: var(--text-muted); }
+
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--bg-panel);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--border-hover);
+            border-radius: 10px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--text-muted);
+        }
     </style>
 </head>
+
 <body>
 
     <nav class="navbar">
         <a href="../index.html" class="logo-area">
             <div class="logo-icon" style="background: var(--green);">
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M20 2H4C2.9 2 2 2.9 2 4V22L6 18H20C21.1 18 22 17.1 22 16V4C22 2.9 21.1 2 20 2Z" fill="white" stroke="white" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
-                    <path d="M11 6L14 10H10L13 14" stroke="var(--bg-panel)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M20 2H4C2.9 2 2 2.9 2 4V22L6 18H20C21.1 18 22 17.1 22 16V4C22 2.9 21.1 2 20 2Z"
+                        fill="white" stroke="white" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" />
+                    <path d="M11 6L14 10H10L13 14" stroke="var(--bg-panel)" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round" />
                 </svg>
             </div>
             ChatForge
         </a>
-        
+
         <div class="nav-links">
             <input type="text" id="inputFolder" class="header-input" placeholder="Dosya adı...">
             <button class="btn" onclick="DownloadTxtFunction()"><i class="fa-solid fa-file-export"></i> TXT</button>
-            <button class="btn primary" onclick="DownloadPngFunction()"><i class="fa-solid fa-download"></i> PNG</button>
+            <button class="btn primary" onclick="DownloadPngFunction()"><i class="fa-solid fa-download"></i>
+                PNG</button>
         </div>
     </nav>
 
@@ -72,30 +93,45 @@
                 <div class="chip" onclick="cleanOOC()"><i class="fa-solid fa-ban"></i> OOC Filtrele</div>
                 <div class="chip" onclick="insertTag('#C2A2DA')">🟣 Emote</div>
                 <div class="chip" onclick="insertTag('#FFFFFF')">⚪ Text</div>
-                
+
                 <div class="color-palette-container" id="colorMenu">
-                    <button class="color-btn" style="background-color: #56d64b;" onclick="applyColorTag('#56d64b')"></button>
-                    <button class="color-btn" style="background-color: #eda841;" onclick="applyColorTag('#eda841')"></button>
-                    <button class="color-btn" style="background-color: #3896f3;" onclick="applyColorTag('#3896f3')"></button>
-                    <button class="color-btn" style="background-color: #f00000;" onclick="applyColorTag('#f00000')"></button>
-                    <button class="color-btn" style="background-color: #ffff06;" onclick="applyColorTag('#ffff06')"></button>
-                    <button class="color-btn" style="background-color: #939799;" onclick="applyColorTag('#939799')"></button>
-                    <button class="color-btn" style="background-color: #5a5a5b;" onclick="applyColorTag('#5a5a5b')"></button>
-                    <button class="color-btn" style="background-color: #c6c4c4;" onclick="applyColorTag('#c6c4c4')"></button>
-                    <button class="color-btn" style="background-color: #ffec8b;" onclick="applyColorTag('#ffec8b')"></button>
-                    <button class="color-btn" style="background-color: #a19558;" onclick="applyColorTag('#a19558')"></button>
-                    <button class="color-btn" style="background-color: #ccca15;" onclick="applyColorTag('#ccca15')"></button>
-                    <button class="color-btn" style="background-color: #33c1c9;" onclick="applyColorTag('#33c1c9')"></button>
+                    <button class="color-btn" style="background-color: #56d64b;"
+                        onclick="applyColorTag('#56d64b')"></button>
+                    <button class="color-btn" style="background-color: #eda841;"
+                        onclick="applyColorTag('#eda841')"></button>
+                    <button class="color-btn" style="background-color: #3896f3;"
+                        onclick="applyColorTag('#3896f3')"></button>
+                    <button class="color-btn" style="background-color: #f00000;"
+                        onclick="applyColorTag('#f00000')"></button>
+                    <button class="color-btn" style="background-color: #ffff06;"
+                        onclick="applyColorTag('#ffff06')"></button>
+                    <button class="color-btn" style="background-color: #939799;"
+                        onclick="applyColorTag('#939799')"></button>
+                    <button class="color-btn" style="background-color: #5a5a5b;"
+                        onclick="applyColorTag('#5a5a5b')"></button>
+                    <button class="color-btn" style="background-color: #c6c4c4;"
+                        onclick="applyColorTag('#c6c4c4')"></button>
+                    <button class="color-btn" style="background-color: #ffec8b;"
+                        onclick="applyColorTag('#ffec8b')"></button>
+                    <button class="color-btn" style="background-color: #a19558;"
+                        onclick="applyColorTag('#a19558')"></button>
+                    <button class="color-btn" style="background-color: #ccca15;"
+                        onclick="applyColorTag('#ccca15')"></button>
+                    <button class="color-btn" style="background-color: #33c1c9;"
+                        onclick="applyColorTag('#33c1c9')"></button>
                 </div>
             </div>
 
-            <textarea id="inputText" spellcheck="false" placeholder="Metni buraya yapıştır...&#10;&#10;Örnek:&#10;* Valentina Ramirez elindeki bardağı masaya bırakır.&#10;[02:50:57] Valentina Ramirez: Hnm-m!{#C2A2DA} gülümser. !{#FFFFFF}Harika bir fikir.&#10;!{#56d64b} 400$ verdin."></textarea>
-            
+            <textarea id="inputText" spellcheck="false"
+                placeholder="Metni buraya yapıştır...&#10;&#10;Örnek:&#10;* Valentina Ramirez elindeki bardağı masaya bırakır.&#10;[02:50:57] Valentina Ramirez: Hnm-m!{#C2A2DA} gülümser. !{#FFFFFF}Harika bir fikir.&#10;!{#56d64b} 400$ verdin."></textarea>
+
             <div class="settings-bar">
                 <span>Font: <input type="number" id="inputSize" value="13" min="10" max="40"> px</span>
-                <span>Genişlik: <input type="number" id="inputWidth" value="800" min="400" max="1920" step="50" style="width:60px"> px</span>
-                <span>Arka Plan: 
-                    <select id="bgSelect" style="background: var(--bg-input); border: 1px solid var(--border); color: white; padding: 4px; border-radius: 4px;">
+                <span>Genişlik: <input type="number" id="inputWidth" value="800" min="400" max="1920" step="50"
+                        style="width:60px"> px</span>
+                <span>Arka Plan:
+                    <select id="bgSelect"
+                        style="background: var(--bg-input); border: 1px solid var(--border); color: white; padding: 4px; border-radius: 4px;">
                         <option value="#000000">Siyah</option>
                         <option value="transparent">Şeffaf</option>
                     </select>
@@ -113,242 +149,242 @@
 
     <div id="toast-box"></div>
 
-    <footer>
-        <div class="footer-left">
-            <span>&copy; 2026</span>
-            <span style="opacity: 0.3">|</span>
-            <a href="../index.html" class="footer-brand">Forbibden.xyz</a>
-        </div>
+    <script>
+        var fontSize = 13;
+        var canvasWidth = 800;
+        var fontFamily = 'Arial';
+        var bgColor = '#000000';
+        var strokeColor = '#000000';
+        var padding = 20;
 
-        <div class="footer-right">
-            <div class="social-links">
-                <a href="https://discord.com/users/766277370872070155" class="social-link" title="Discord Sunucusu">
-                    <i class="fa-brands fa-discord"></i>
-                </a>
-                <a href="https://github.com/Forbibden" class="social-link" title="GitHub Projesi">
-                    <i class="fa-brands fa-github"></i>
-                </a>
-            </div>
-            <span style="opacity: 0.3">|</span>
-            <span class="version-badge">v1.3.0</span>
-        </div>
-    </footer>
+        const textArea = document.getElementById('inputText');
+        const canvas = document.getElementById('canvas');
+        const ctx = canvas.getContext('2d');
 
-<script>
-    var fontSize = 13;
-    var canvasWidth = 800;
-    var fontFamily = 'Arial';
-    var bgColor = '#000000'; 
-    var strokeColor = '#000000';
-    var padding = 20;
+        window.addEventListener('DOMContentLoaded', () => {
+            document.getElementById('inputFolder').value = `log_${new Date().toISOString().slice(0, 10)}`;
+            drawCanvas();
+        });
 
-    const textArea = document.getElementById('inputText');
-    const canvas = document.getElementById('canvas');
-    const ctx = canvas.getContext('2d');
+        textArea.addEventListener('input', () => {
+            document.getElementById('charCount').innerText = textArea.value.length + " Karakter";
+            drawCanvas();
+        });
 
-    window.addEventListener('DOMContentLoaded', () => {
-        document.getElementById('inputFolder').value = `log_${new Date().toISOString().slice(0,10)}`;
-        drawCanvas();
-    });
+        document.getElementById('inputSize').addEventListener('input', (e) => {
+            fontSize = parseInt(e.target.value) || 13;
+            drawCanvas();
+        });
 
-    textArea.addEventListener('input', () => {
-        document.getElementById('charCount').innerText = textArea.value.length + " Karakter";
-        drawCanvas();
-    });
+        document.getElementById('inputWidth').addEventListener('input', (e) => {
+            canvasWidth = parseInt(e.target.value) || 800;
+            drawCanvas();
+        });
 
-    document.getElementById('inputSize').addEventListener('input', (e) => {
-        fontSize = parseInt(e.target.value) || 13;
-        drawCanvas();
-    });
+        document.getElementById('bgSelect').addEventListener('change', (e) => {
+            bgColor = e.target.value;
+            drawCanvas();
+        });
 
-    document.getElementById('inputWidth').addEventListener('input', (e) => {
-        canvasWidth = parseInt(e.target.value) || 800;
-        drawCanvas();
-    });
-    
-    document.getElementById('bgSelect').addEventListener('change', (e) => {
-        bgColor = e.target.value;
-        drawCanvas();
-    });
+        function drawCanvas() {
+            const text = textArea.value;
+            const lines = text.split('\n');
+            const lineHeight = fontSize * 1.5;
 
-    function drawCanvas() {
-        const text = textArea.value;
-        const lines = text.split('\n');
-        const lineHeight = fontSize * 1.5;
-        
-        ctx.font = `bold ${fontSize}px ${fontFamily}, sans-serif`;
+            ctx.font = `bold ${fontSize}px ${fontFamily}, sans-serif`;
 
-        let renderQueue = [];
-        let cursorY = padding;
+            let renderQueue = [];
+            let cursorY = padding;
 
-        lines.forEach(line => {
-            let defaultLineColor = '#FFFFFF';
-            if (line.trim().startsWith('*') || line.trim().startsWith('>')) {
-                defaultLineColor = '#C2A2DA';
-            }
-            let segments = parseCustomTags(line, defaultLineColor);
-            
-            let cursorX = padding;
-            let maxLineWidth = canvasWidth - (padding * 2);
+            lines.forEach(line => {
+                let defaultLineColor = '#FFFFFF';
+                if (line.trim().startsWith('*') || line.trim().startsWith('>')) {
+                    defaultLineColor = '#C2A2DA';
+                }
+                let segments = parseCustomTags(line, defaultLineColor);
 
-            segments.forEach(seg => {
-                let words = seg.text.split(/(\s+)/); 
+                let cursorX = padding;
+                let maxLineWidth = canvasWidth - (padding * 2);
 
-                words.forEach(word => {
-                    let wordWidth = ctx.measureText(word).width;
+                segments.forEach(seg => {
+                    let words = seg.text.split(/(\s+)/);
 
-                    if (cursorX + wordWidth > maxLineWidth && cursorX > padding) {
-                        cursorX = padding;
-                        cursorY += lineHeight;
-                    }
+                    words.forEach(word => {
+                        let wordWidth = ctx.measureText(word).width;
 
-                    renderQueue.push({
-                        text: word,
-                        x: cursorX,
-                        y: cursorY,
-                        color: seg.color
+                        if (cursorX + wordWidth > maxLineWidth && cursorX > padding) {
+                            cursorX = padding;
+                            cursorY += lineHeight;
+                        }
+
+                        renderQueue.push({
+                            text: word,
+                            x: cursorX,
+                            y: cursorY,
+                            color: seg.color
+                        });
+
+                        cursorX += wordWidth;
                     });
-
-                    cursorX += wordWidth;
                 });
+
+                cursorY += lineHeight;
             });
 
-            cursorY += lineHeight;
-        });
-        
-        if(bgColor !== "transparent"){
-            ctx.fillStyle = bgColor;
-            ctx.fillRect(0, 0, canvasWidth, Math.max(cursorY + padding, 100));
-        } else {
-            ctx.clearRect(0, 0, canvasWidth, Math.max(cursorY + padding, 100));
-        }
-
-        canvas.width = canvasWidth;
-        canvas.height = Math.max(cursorY + padding, 100);
-
-        // Genişlik ve yükseklik değiştiğinde context resetlenir, bu yüzden tekrar ayarlıyoruz
-        ctx.font = `bold ${fontSize}px ${fontFamily}, sans-serif`;
-        ctx.textBaseline = 'top';
-        ctx.lineWidth = 3; 
-        ctx.strokeStyle = strokeColor;
-        ctx.lineJoin = "round"; // Yazı dış hatlarının daha yumuşak olması için
-
-        if(bgColor !== "transparent"){
-            ctx.fillStyle = bgColor;
-            ctx.fillRect(0, 0, canvas.width, canvas.height);
-        }
-
-        renderQueue.forEach(item => {
-            ctx.fillStyle = item.color;
-            ctx.strokeText(item.text, item.x, item.y);
-            ctx.fillText(item.text, item.x, item.y);
-        });
-    }
-
-    function parseCustomTags(line, startColor) {
-        let currentColor = startColor; 
-        const regex = /(!\{#[0-9A-Fa-f]{6}\})/g; 
-        const parts = line.split(regex);
-        const result = [];
-
-        parts.forEach(part => {
-            if (part.match(/^!\{#[0-9A-Fa-f]{6}\}$/)) {
-                currentColor = part.substring(2, 9); 
-            } else if (part.length > 0) {
-                result.push({ text: part, color: currentColor });
+            if (bgColor !== "transparent") {
+                ctx.fillStyle = bgColor;
+                ctx.fillRect(0, 0, canvasWidth, Math.max(cursorY + padding, 100));
+            } else {
+                ctx.clearRect(0, 0, canvasWidth, Math.max(cursorY + padding, 100));
             }
-        });
 
-        return result;
-    }
+            canvas.width = canvasWidth;
+            canvas.height = Math.max(cursorY + padding, 100);
 
-    function cleanTimestamps() {
-        let txt = textArea.value;
-        textArea.value = txt.replace(/^\[\d{2}:\d{2}:\d{2}\]\s*/gm, '');
-        drawCanvas();
-        showToast('Saatler temizlendi.');
-    }
+            // Genişlik ve yükseklik değiştiğinde context resetlenir, bu yüzden tekrar ayarlıyoruz
+            ctx.font = `bold ${fontSize}px ${fontFamily}, sans-serif`;
+            ctx.textBaseline = 'top';
+            ctx.lineWidth = 3;
+            ctx.strokeStyle = strokeColor;
+            ctx.lineJoin = "round"; // Yazı dış hatlarının daha yumuşak olması için
 
-    function cleanOOC() {
-        let lines = textArea.value.split('\n');
-        textArea.value = lines.filter(l => !l.includes('((')).join('\n');
-        drawCanvas();
-        showToast('OOC satırlar silindi.');
-    }
+            if (bgColor !== "transparent") {
+                ctx.fillStyle = bgColor;
+                ctx.fillRect(0, 0, canvas.width, canvas.height);
+            }
 
-    function insertTag(color) {
-        let tag = `!{${color}}`;
-        let start = textArea.selectionStart;
-        let end = textArea.selectionEnd;
-        let text = textArea.value;
-        textArea.value = text.substring(0, start) + tag + text.substring(end);
-        drawCanvas();
-        textArea.focus();
-    }
-
-    function applyColorTag(color) {
-        let tag = `!{${color}}`;
-        let start = textArea.selectionStart;
-        let end = textArea.selectionEnd;
-        if(start === end) {
-            insertTag(color);
-            return;
+            renderQueue.forEach(item => {
+                ctx.fillStyle = item.color;
+                ctx.strokeText(item.text, item.x, item.y);
+                ctx.fillText(item.text, item.x, item.y);
+            });
         }
-        let text = textArea.value;
-        let replacement = `!{${color}}${text.substring(start, end)}!{#FFFFFF}`;
-        textArea.setRangeText(replacement);
-        drawCanvas();
-    }
 
-    function DownloadPngFunction() {
-        if(!textArea.value.trim()) return showToast('Metin alanı boş!');
-        const link = document.createElement('a');
-        link.download = (document.getElementById('inputFolder').value || 'rp_log') + '.png';
-        link.href = canvas.toDataURL();
-        link.click();
-        showToast('PNG olarak indirildi.');
-    }
-    
-    function DownloadTxtFunction() {
-        if(!textArea.value.trim()) return showToast('Metin alanı boş!');
-        const blob = new Blob([textArea.value], {type:'text/plain'});
-        const link = document.createElement('a');
-        link.download = (document.getElementById('inputFolder').value || 'rp_log') + '.txt';
-        link.href = URL.createObjectURL(blob);
-        link.click();
-        showToast('TXT olarak indirildi.');
-    }
+        function parseCustomTags(line, startColor) {
+            let currentColor = startColor;
+            const regex = /(!\{#[0-9A-Fa-f]{6}\})/g;
+            const parts = line.split(regex);
+            const result = [];
 
-    // Modern Animasyonlu Toast Mesajı
-    function showToast(msg) {
-        const box = document.getElementById('toast-box');
-        
-        // Varsa eskileri temizle (Üst üste binmemesi için)
-        const existingToasts = box.querySelectorAll('.toast');
-        existingToasts.forEach(t => t.remove());
+            parts.forEach(part => {
+                if (part.match(/^!\{#[0-9A-Fa-f]{6}\}$/)) {
+                    currentColor = part.substring(2, 9);
+                } else if (part.length > 0) {
+                    result.push({ text: part, color: currentColor });
+                }
+            });
 
-        const div = document.createElement('div');
-        div.className = 'toast';
-        
-        div.innerHTML = `
+            return result;
+        }
+
+        function cleanTimestamps() {
+            let txt = textArea.value;
+            textArea.value = txt.replace(/^\[\d{2}:\d{2}:\d{2}\]\s*/gm, '');
+            drawCanvas();
+            showToast('Saatler temizlendi.');
+        }
+
+        function cleanOOC() {
+            let lines = textArea.value.split('\n');
+            textArea.value = lines.filter(l => !l.includes('((')).join('\n');
+            drawCanvas();
+            showToast('OOC satırlar silindi.');
+        }
+
+        function insertTag(color) {
+            let tag = `!{${color}}`;
+            let start = textArea.selectionStart;
+            let end = textArea.selectionEnd;
+            let text = textArea.value;
+            textArea.value = text.substring(0, start) + tag + text.substring(end);
+            drawCanvas();
+            textArea.focus();
+        }
+
+        function applyColorTag(color) {
+            let tag = `!{${color}}`;
+            let start = textArea.selectionStart;
+            let end = textArea.selectionEnd;
+            if (start === end) {
+                insertTag(color);
+                return;
+            }
+            let text = textArea.value;
+            let replacement = `!{${color}}${text.substring(start, end)}!{#FFFFFF}`;
+            textArea.setRangeText(replacement);
+            drawCanvas();
+        }
+
+        function DownloadPngFunction() {
+            if (!textArea.value.trim()) return showToast('Metin alanı boş!');
+            const link = document.createElement('a');
+            link.download = (document.getElementById('inputFolder').value || 'rp_log') + '.png';
+            link.href = canvas.toDataURL();
+            link.click();
+            showToast('PNG olarak indirildi.');
+        }
+
+        function DownloadTxtFunction() {
+            if (!textArea.value.trim()) return showToast('Metin alanı boş!');
+            const blob = new Blob([textArea.value], { type: 'text/plain' });
+            const link = document.createElement('a');
+            link.download = (document.getElementById('inputFolder').value || 'rp_log') + '.txt';
+            link.href = URL.createObjectURL(blob);
+            link.click();
+            showToast('TXT olarak indirildi.');
+        }
+
+        // Modern Animasyonlu Toast Mesajı
+        function showToast(msg) {
+            const box = document.getElementById('toast-box');
+
+            // Varsa eskileri temizle (Üst üste binmemesi için)
+            const existingToasts = box.querySelectorAll('.toast');
+            existingToasts.forEach(t => t.remove());
+
+            const div = document.createElement('div');
+            div.className = 'toast';
+
+            div.innerHTML = `
             <div style="display: flex; align-items: center; justify-content: center; width: 26px; height: 26px; border-radius: 50%; background: rgba(63, 185, 80, 0.15); flex-shrink: 0;">
                 <i class="fa-solid fa-check" style="color: var(--green); font-size: 14px;"></i>
             </div>
             <span style="letter-spacing: 0.3px;">${msg}</span>
         `;
-        
-        box.appendChild(div);
-        
-        // Animasyonu tetikle
-        setTimeout(() => div.classList.add('show'), 10);
-        
-        // Kapatma
-        setTimeout(() => {
-            div.classList.remove('show');
-            setTimeout(() => div.remove(), 400);
-        }, 3000);
-    }
-</script>
 
+            box.appendChild(div);
+
+            // Animasyonu tetikle
+            setTimeout(() => div.classList.add('show'), 10);
+
+            // Kapatma
+            setTimeout(() => {
+                div.classList.remove('show');
+                setTimeout(() => div.remove(), 400);
+            }, 3000);
+        }
+    </script>
+
+    <footer>
+        <div class="footer-left">
+            <a href="https://403forbibden.xyz/" class="footer-brand">403 Forbibden</a>
+            <span style="opacity: 0.2">|</span>
+            <span>&copy; 2026</span>
+        </div>
+
+        <div class="footer-right">
+            <div class="social-links">
+                <a href="https://discord.com/users/766277370872070155" class="social-link" title="Discord"
+                    target="_blank">
+                    <i class="fa-brands fa-discord"></i>
+                </a>
+                <a href="https://github.com/Forbibden" class="social-link" title="GitHub" target="_blank">
+                    <i class="fa-brands fa-github"></i>
+                </a>
+            </div>
+            <span class="version-badge">v1.3.0</span>
+        </div>
+    </footer>
 </body>
+
 </html>

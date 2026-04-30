@@ -1,307 +1,934 @@
 <!DOCTYPE html>
 <html lang="tr">
+
 <head>
-<meta charset="UTF-8">
-<title>403forbibden</title>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="Stable Diffusion, Midjourney ve AI modelleri için test edilmiş, yüksek stabiliteye sahip prompt kütüphanesi.">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-<link rel="icon" href="/assets/image/favicon.svg" />    
-<link rel="stylesheet" href="/style.css">
+    <meta charset="UTF-8">
+    <title>403forbibden</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description"
+        content="Stable Diffusion, Midjourney ve AI modelleri için test edilmiş, yüksek stabiliteye sahip prompt kütüphanesi.">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link rel="icon" href="/assets/image/favicon.svg" />
+    <link rel="stylesheet" href="/style.css">
 </head>
+
 <body>
 
-<nav class="navbar">
-    <div class="logo-area">
-        <div class="tool-name">
-            <div class="logo-icon"><i class="fa-solid fa-bolt"></i></div>
-            PromptHub
+    <nav class="navbar">
+        <div class="logo-area">
+            <div class="tool-name">
+                <div class="logo-icon"><i class="fa-solid fa-bolt"></i></div>
+                PromptHub
+            </div>
         </div>
-    </div>
-    
-    <div class="nav-links">
-        <a href="/index.html" class="nav-link home">
-            <img src="/assets/image/favicon.svg" alt="Forbibden" class="parent-logo">
-            <span class="parent-text">Forbibden.<strong style="color: var(--accent);">xyz</strong></span>
-        </a>
-        <div class="dropdown">
-            <a href="#" class="nav-link">
-                <i class="fa-solid fa-cubes"></i> Diğer Araçlar 
-                <i class="fa-solid fa-chevron-down" style="font-size: 10px; margin-left: 4px; opacity: 0.7;"></i>
+
+        <div class="nav-links">
+            <a href="/index.html" class="nav-link home">
+                <img src="/assets/image/favicon.svg" alt="Forbibden" class="parent-logo">
+                <span class="parent-text">Forbibden.<strong style="color: var(--accent);">xyz</strong></span>
             </a>
-            
-            <div class="dropdown-menu">
-                <a href="chat-forge.html" class="dropdown-item">
-                    <div class="dropdown-icon">
-                         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M20 2H4C2.9 2 2 2.9 2 4V22L6 18H20C21.1 18 22 17.1 22 16V4C22 2.9 21.1 2 20 2Z" fill="white" stroke="white" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
-                        <path d="M11 6L14 10H10L13 14" stroke="var(--bg-panel)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            <div class="dropdown">
+                <a href="#" class="nav-link">
+                    <i class="fa-solid fa-cubes"></i> Diğer Araçlar
+                    <i class="fa-solid fa-chevron-down" style="font-size: 10px; margin-left: 4px; opacity: 0.7;"></i>
+                </a>
+
+                <div class="dropdown-menu">
+                    <a href="chat-forge.html" class="dropdown-item">
+                        <div class="dropdown-icon">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path d="M20 2H4C2.9 2 2 2.9 2 4V22L6 18H20C21.1 18 22 17.1 22 16V4C22 2.9 21.1 2 20 2Z"
+                                    fill="white" stroke="white" stroke-width="1" stroke-linecap="round"
+                                    stroke-linejoin="round" />
+                                <path d="M11 6L14 10H10L13 14" stroke="var(--bg-panel)" stroke-width="2"
+                                    stroke-linecap="round" stroke-linejoin="round" />
+                            </svg>
+                        </div>
+                        <div class="dropdown-text">
+                            <span class="dropdown-title">ChatForge</span>
+                            <span class="dropdown-desc">Sohbet loglarınızı düzenleyin ve RP SS oluşturun.</span>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="main">
+
+        <div class="disclaimer">
+            <i class="fa-solid fa-triangle-exclamation" style="color: var(--warning); font-size: 20px;"></i>
+            <div>Bu kütüphane, kaliteli yapay zeka promptlarını toplamak, arşivlemek ve toplulukla paylaşmak amacıyla
+                oluşturulmuştur. Açık kaynaklardan derlenen bu promptların telif hakları ilgili sahiplerine aittir.
+            </div>
+        </div>
+
+        <!-- SEARCH & FILTER -->
+        <div class="search-container">
+            <div class="search-box">
+                <i class="fa-solid fa-magnifying-glass"></i>
+                <input type="text" id="promptSearch" class="search-input" placeholder="Promptlarda ara">
+            </div>
+            <div class="filter-chips">
+                <div class="filter-chip active" data-filter="all">Tümü</div>
+                <div class="filter-chip" data-filter="Stabil">Stabil</div>
+                <div class="filter-chip" data-filter="Düşük Stabilite">Düşük Stabilite</div>
+                <div class="filter-chip" data-filter="Test Edilmedi">Test Edilmedi</div>
+                <div class="filter-chip" data-filter="Global">Global</div>
+                <div class="filter-chip" data-filter="Male">Erkek</div>
+                <div class="filter-chip" data-filter="Female">Kadın</div>
+                <div class="filter-chip" data-filter="Couple">Çift</div>
+            </div>
+        </div>
+
+        <!-- STABLE PROMPT (AUTO OPEN) -->
+        <div class="accordion-item">
+            <div class="accordion-header">
+                <div>
+                    <div class="title">İkili Referansla Karakter Aktarımı</div>
+                    <div class="tags">
+                        <div class="tag" style="background-color: rgba(255, 170, 91, 0.15); color: rgb(255, 189, 91);">
+                            <i class="fa-solid fa-globe"></i> Global
+                        </div>
+                        <div class="tag" style="background-color: rgba(110, 255, 91, 0.15); color: rgb(118, 255, 91);">
+                            <i class="fa-solid fa-check-double"></i> Stabil
+                        </div>
+                    </div>
+                </div>
+
+                <div class="meta">
+                    <div class="badge"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18"
+                            viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M12 2L14 8L20 10L14 12L12 18L10 12L4 10L10 8Z" />
+                            <path d="M19 14L20 17L23 18L20 19L19 22L18 19L15 18L18 17Z" opacity="0.6" />
+                            <path d="M5 15L6 17L8 18L6 19L5 21L4 19L2 18L4 17Z" opacity="0.6" />
                         </svg>
+                        Google Gemini</div>
+                </div>
+            </div>
+            <div class="accordion-content">
+                <div class="inner">
+                    <div class="info-box success">
+                        <div class="info-icon">
+                            <i class="fa-solid fa-brain"></i>
+                        </div>
+                        <div class="info-content">
+                            <div class="info-title">Yüksek Stabilite</div>
+                            <div class="info-text">
+                                Bu prompt görev tanımını net verir: yüz korunur, poz aktarılır ve ortam GTA V içinde
+                                yeniden oluşturulur. Negatif talimatlar vardır ancak aşırı tekrar içermez.
+                            </div>
+                        </div>
                     </div>
-                    <div class="dropdown-text">
-                        <span class="dropdown-title">ChatForge</span>
-                        <span class="dropdown-desc">Kendi sohbet loglarınızı dilediğiniz gibi görselleştirin.</span>
+                    <div class="code" id="p1">Generate a raw GTA V in-game screenshot (FiveM/Menyoo style) by blending
+                        these two references for a social media post: Character Source (Image 1 - GTA V Character):
+                        Preserve the original GTA V mesh structure and in-game texture resolution without increasing
+                        detail. Do NOT beautify, smooth, or photorealistically enhance the face. It must look like the
+                        original 3D game model. Pose & Style Source (Image 2 - Reference): Transfer the exact pose, body
+                        language, outfit, accessories, and camera angle from this image onto the GTA V character.
+                        Context: The character is 21 years old. Place her in a fitting GTA V Los Santos environment that
+                        matches the lighting of the reference. The final result must look like an unedited, authentic
+                        gameplay screenshot, not a realistic photo. NO HUD elements. Safety: Generate only fictional,
+                        safe-for-work video game style content; no real-person identity transfer or deepfake-like edits.
+                        Do not add subsurface skin detail, pore detail, or high dynamic range lighting.</div>
+                    <button class="btn" onclick="copyPrompt('p1')"><i class="fa-regular fa-copy"></i> Promptu
+                        Kopyala</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- SECOND PROMPT -->
+        <div class="accordion-item">
+            <div class="accordion-header">
+                <div class="title">%100 Yüz Korumalı Poz ve Kıyafet Aktarımı
+                    <div class="tags">
+                        <div class="tag" style="background-color: rgba(91, 94, 255, 0.15); color: rgb(91, 135, 255);"><i
+                                class="fa-solid fa-mars"></i> Male</div>
+                        <div class="tag" style="background-color: rgba(255, 91, 91, 0.15); color: rgb(255, 91, 91);"><i
+                                class="fa-solid fa-xmark"></i> Düşük Stabilite</div>
                     </div>
+                </div>
+
+                <div class="meta">
+                    <div class="badge"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18"
+                            viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M12 2L14 8L20 10L14 12L12 18L10 12L4 10L10 8Z" />
+                            <path d="M19 14L20 17L23 18L20 19L19 22L18 19L15 18L18 17Z" opacity="0.6" />
+                            <path d="M5 15L6 17L8 18L6 19L5 21L4 19L2 18L4 17Z" opacity="0.6" />
+                        </svg>
+                        Google Gemini</div>
+                </div>
+            </div>
+            <div class="accordion-content">
+                <div class="inner">
+                    <div class="info-box low">
+                        <div class="info-icon">
+                            <i class="fa-solid fa-brain"></i>
+                        </div>
+                        <div class="info-content">
+                            <div class="info-title">Düşük Stabilite</div>
+                            <div class="info-text">
+                                Bu prompt aşırı katı “%100 identical” ve yoğun negatif talimat içerir. Modelden yüzü
+                                tamamen sabit tutması istenirken aynı zamanda yeni sahne ve poz üretmesi beklenir. Bu
+                                katı kısıtlamalar bazı denemelerde photoreal detay eklenmesine veya yüzün hafif
+                                değişmesine yol açabilir.</div>
+                        </div>
+                    </div>
+                    <div class="code" id="p2">Use ONLY the uploaded GTA V male character’s ORIGINAL FACE and ORIGINAL
+                        HAIR. The character’s face must remain 100% IDENTICAL to the original GTA V face model with
+                        absolutely NO changes of any kind. Do NOT modify, beautify, smooth, enhance, replace, reshape,
+                        blend, stylize, reinterpret, or alter the face in any way. Do NOT change facial structure,
+                        proportions, jawline, nose, lips, eyes, eyebrows, ears, cheekbones, head shape, skull structure,
+                        or any facial detail. Keep the exact GTA V skin texture, skin tone, polygon structure,
+                        imperfections, roughness, and all in-game facial materials exactly as they are. Do NOT improve
+                        skin quality, do NOT remove GTA V graphical artifacts, and do NOT add realism or photorealistic
+                        detail. The hair must remain completely unchanged and identical to the original GTA V hair
+                        model, including haircut, hairline, length, density, texture, and GTA V hair material. If the
+                        character has facial hair, beard, or stubble, it must remain exactly the same with no edits, no
+                        enhancements, no reshaping, and no added detail. Do NOT copy, recreate, reference, imitate, or
+                        blend the real man’s face from the reference image under any circumstances. Do NOT mix facial
+                        features, do NOT introduce realistic human elements, and do NOT transfer facial expressions or
+                        facial details from the reference man. Everything must remain strictly within the original GTA V
+                        graphical style and engine limitations. From the reference man’s photo, take ONLY the pose, body
+                        posture, outfit, clothing pieces, accessories, and jewelry, and recreate them on the GTA V
+                        character while keeping the original GTA V face and hair completely untouched. Do NOT transfer
+                        facial expressions or any facial information from the reference image. The final image must look
+                        exactly like a real in-game screenshot captured directly inside GTA V using Menyoo, RageMP, or
+                        FiveM. Use Rockstar Advanced Game Engine lighting, authentic GTA V shaders, original GTA V
+                        textures, GTA V skin materials, and GTA V hair materials. Maintain hard GTA V shadows, visible
+                        polygon edges, in-game lighting imperfections, and typical GTA V rendering artifacts. Do NOT use
+                        cinematic lighting, Unreal Engine style, ray tracing, hyperrealism, depth-of-field effects, film
+                        grain, motion blur, or real-life photography aesthetics. The background environment is EXTREMELY
+                        IMPORTANT and must be 100% GTA V–accurate. The scene must take place in a recognizable GTA V
+                        world environment such as Los Santos streets, Vespucci Beach, Downtown LS, Mirror Park, a GTA V
+                        parking lot, alleyway, highway, or urban neighborhood. Use only GTA V buildings, roads,
+                        sidewalks, props, vegetation, skybox, and environmental assets. The background must clearly look
+                        like it was rendered inside GTA V, with correct scale, lighting, textures, and world geometry.
+                        Do NOT use real-life locations, real-world photography, Unreal-style environments, or generic
+                        backgrounds. The environment must fully match GTA V’s in-game map, assets, and visual
+                        limitations. The final result must be a GTA V male character with his original, completely
+                        unchanged face and hair, wearing the outfit, accessories, and jewelry from the reference man,
+                        posed the same way, standing inside a fully authentic GTA V environment, and looking exactly
+                        like a raw in-game screenshot taken directly from GTA V without any external rendering or
+                        post-processing.</div>
+                    <button class="btn" onclick="copyPrompt('p2')"><i class="fa-regular fa-copy"></i> Promptu
+                        Kopyala</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- THREE PROMPT -->
+        <div class="accordion-item">
+            <div class="accordion-header">
+                <div class="title">%100 Yüz Korumalı Poz ve Kıyafet Aktarımı
+                    <div class="tags">
+                        <div class="tag"
+                            style="background-color: rgba(255, 91, 192, 0.15); color: rgba(255, 91, 192, 1);"><i
+                                class="fa-solid fa-venus"></i> Female</div>
+                        <div class="tag" style="background-color: rgba(255, 91, 91, 0.15); color: rgb(255, 91, 91);"><i
+                                class="fa-solid fa-xmark"></i> Düşük Stabilite</div>
+                    </div>
+                </div>
+
+                <div class="meta">
+                    <div class="badge"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18"
+                            viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M12 2L14 8L20 10L14 12L12 18L10 12L4 10L10 8Z" />
+                            <path d="M19 14L20 17L23 18L20 19L19 22L18 19L15 18L18 17Z" opacity="0.6" />
+                            <path d="M5 15L6 17L8 18L6 19L5 21L4 19L2 18L4 17Z" opacity="0.6" />
+                        </svg>
+                        Google Gemini</div>
+                </div>
+            </div>
+            <div class="accordion-content">
+                <div class="inner">
+                    <div class="info-box low">
+                        <div class="info-icon">
+                            <i class="fa-solid fa-brain"></i>
+                        </div>
+                        <div class="info-content">
+                            <div class="info-title">Düşük Stabilite</div>
+                            <div class="info-text">
+                                Bu prompt aşırı katı “%100 identical” ve yoğun negatif talimat içerir. Modelden yüzü
+                                tamamen sabit tutması istenirken aynı zamanda yeni sahne ve poz üretmesi beklenir. Bu
+                                katı kısıtlamalar bazı denemelerde photoreal detay eklenmesine veya yüzün hafif
+                                değişmesine yol açabilir.</div>
+                        </div>
+                    </div>
+                    <div class="code" id="p3">Use ONLY the uploaded GTA V female character’s ORIGINAL FACE and ORIGINAL
+                        HAIR. The character’s face must remain 100% IDENTICAL to the original GTA V face model with
+                        absolutely NO changes of any kind. Do NOT modify, beautify, smooth, enhance, replace, reshape,
+                        blend, stylize, reinterpret, or alter the face in any way. Do NOT change facial structure,
+                        proportions, jawline, nose, lips, eyes, eyebrows, ears, cheekbones, head shape, skull structure,
+                        or any facial detail. Keep the exact GTA V skin texture, skin tone, polygon structure,
+                        imperfections, roughness, and all in-game facial materials exactly as they are. Do NOT improve
+                        skin quality, do NOT remove GTA V graphical artifacts, and do NOT add realism or photorealistic
+                        detail. The hair must remain completely unchanged and identical to the original GTA V hair
+                        model, including haircut, hairline, length, density, texture, and GTA V hair material. If the
+                        character has facial hair, beard, or stubble, it must remain exactly the same with no edits, no
+                        enhancements, no reshaping, and no added detail. Do NOT copy, recreate, reference, imitate, or
+                        blend the real female's face from the reference image under any circumstances. Do NOT mix facial
+                        features, do NOT introduce realistic human elements, and do NOT transfer facial expressions or
+                        facial details from the reference man. Everything must remain strictly within the original GTA V
+                        graphical style and engine limitations. From the reference female's photo, take ONLY the pose,
+                        body posture, outfit, clothing pieces, accessories, and jewelry, and recreate them on the GTA V
+                        character while keeping the original GTA V face and hair completely untouched. Do NOT transfer
+                        facial expressions or any facial information from the reference image. The final image must look
+                        exactly like a real in-game screenshot captured directly inside GTA V using Menyoo, RageMP, or
+                        FiveM. Use Rockstar Advanced Game Engine lighting, authentic GTA V shaders, original GTA V
+                        textures, GTA V skin materials, and GTA V hair materials. Maintain hard GTA V shadows, visible
+                        polygon edges, in-game lighting imperfections, and typical GTA V rendering artifacts. Do NOT use
+                        cinematic lighting, Unreal Engine style, ray tracing, hyperrealism, depth-of-field effects, film
+                        grain, motion blur, or real-life photography aesthetics. The background environment is EXTREMELY
+                        IMPORTANT and must be 100% GTA V–accurate. The scene must take place in a recognizable GTA V
+                        world environment such as Los Santos streets, Vespucci Beach, Downtown LS, Mirror Park, a GTA V
+                        parking lot, alleyway, highway, or urban neighborhood. Use only GTA V buildings, roads,
+                        sidewalks, props, vegetation, skybox, and environmental assets. The background must clearly look
+                        like it was rendered inside GTA V, with correct scale, lighting, textures, and world geometry.
+                        Do NOT use real-life locations, real-world photography, Unreal-style environments, or generic
+                        backgrounds. The environment must fully match GTA V’s in-game map, assets, and visual
+                        limitations.</div>
+                    <button class="btn" onclick="copyPrompt('p3')"><i class="fa-regular fa-copy"></i> Promptu
+                        Kopyala</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- FOUR PROMPT -->
+        <div class="accordion-item">
+            <div class="accordion-header">
+                <div class="title">Gelişmiş Poz ve Çevre Aktarımı
+                    <div class="tags">
+                        <div class="tag" style="background-color: rgba(255, 170, 91, 0.15); color: rgb(255, 189, 91);">
+                            <i class="fa-solid fa-globe"></i> Global
+                        </div>
+                        <div class="tag" style="background-color: rgba(255, 91, 91, 0.15); color: rgb(255, 91, 91);"><i
+                                class="fa-solid fa-xmark"></i> Düşük Stabilite</div>
+                    </div>
+                </div>
+
+                <div class="meta">
+                    <div class="badge"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18"
+                            viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M12 2L14 8L20 10L14 12L12 18L10 12L4 10L10 8Z" />
+                            <path d="M19 14L20 17L23 18L20 19L19 22L18 19L15 18L18 17Z" opacity="0.6" />
+                            <path d="M5 15L6 17L8 18L6 19L5 21L4 19L2 18L4 17Z" opacity="0.6" />
+                        </svg>
+                        Google Gemini</div>
+                </div>
+            </div>
+            <div class="accordion-content">
+                <div class="inner">
+                    <div class="info-box low">
+                        <div class="info-icon">
+                            <i class="fa-solid fa-brain"></i>
+                        </div>
+                        <div class="info-content">
+                            <div class="info-title">Düşük Stabilite</div>
+                            <div class="info-text">
+                                <p>Yapılandırılmış ve teknik olarak net olsa da çok fazla engine ve stil kısıtlaması
+                                    içerir. Model bazı denemelerde photorealistik eğilime kayabilir veya sahneyi fazla
+                                    sadeleştirebilir. Özellikle “full synthetic recreation” talebi bazı varyasyonlarda
+                                    tutarsız sonuç üretebilir.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="code" id="p4">{
+                        "ABSOLUTE_OVERRIDE_RULE": { "priority": "HIGHEST", "instruction": "The uploaded reference image
+                        MUST NOT be reused, traced, filtered, color-graded, or partially preserved in any way. Reusing
+                        original pixels is a hard failure.", "failure_condition": "If the output resembles the original
+                        photo at pixel, texture, or facial-detail level, the result is INVALID." },
+                        "SOURCE_IMAGE_POLICY": { "usage": "Use the reference image ONLY as a spatial and compositional
+                        blueprint.", "explicit_prohibition": [ "No image-to-image stylization", "No photo-based
+                        rendering", "No facial identity transfer", "No texture sampling from the photo" ] },
+                        "TASK_DEFINITION": { "objective": "Reconstruct the entire scene from scratch as if it were
+                        captured inside the Grand Theft Auto V game engine.", "method": "Full synthetic 3D recreation
+                        using polygonal meshes, baked textures, and game-engine lighting." },
+                        "STYLE_AND_ENGINE_CONSTRAINTS": { "engine": "GTA V RAGE Engine (2013–2015 era)",
+                        "visual_identity": [ "Clearly polygonal character models", "Game-engine skin shaders (slightly
+                        waxy, non-photoreal)", "Repeating environment textures with visible tiling", "LOD-style geometry
+                        simplification" ], "strictly_avoid": [ "Photorealism", "AI-upscaled realism", "Cinematic CGI
+                        renders", "Photo-like skin pores or cloth fibers" ] },
+                        "CHARACTER_RECONSTRUCTION_RULES": { "identity": "Characters must resemble generic GTA V NPCs or
+                        protagonists, NOT the real person.", "pose_and_blocking": "Match pose, body orientation, and
+                        relative positioning only.", "face_rule": "Faces must look like GTA NPC meshes — simplified
+                        topology, not real human likeness." },
+                        "ENVIRONMENT_TRANSLATION": { "world": "Los Santos equivalent environment only.",
+                        "object_mapping_examples": { "smartphone": "in-game iFruit phone prop", "street": "GTA asphalt
+                        texture with decals", "buildings": "Los Santos modular architecture assets", "vegetation": "GTA
+                        V foliage system" }, "background_rule": "The background must look like an open-world game map,
+                        not a photographed city." },
+                        "LIGHTING_AND_RENDERING": { "lighting_model": "Real-time GTA V lighting and shadow system",
+                        "atmosphere": "Subtle in-game haze and distance fog", "camera": "Standard third-person or
+                        free-roam gameplay camera" },
+                        "OUTPUT_SPECIFICATION": { "format": "4K in-game screenshot look", "ui": "NO HUD, NO minimap, NO
+                        UI", "focus": "Gameplay-level sharpness, visible textures, no cinematic blur" },
+                        "NEGATIVE_PROMPT": [ "Original photo preserved", "Filtered photograph", "Same face as
+                        reference", "Hyper-real skin", "Cinematic movie still", "AI photo realism", "Loading screen
+                        illustration", "Concept art painting style" ]
+                        }</div>
+                    <button class="btn" onclick="copyPrompt('p4')"><i class="fa-regular fa-copy"></i> Promptu
+                        Kopyala</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- FIVE PROMPT -->
+        <div class="accordion-item">
+            <div class="accordion-header">
+                <div class="title">İkili Referansla Karakter Aktarımı (V2)
+                    <div class="tags">
+                        <div class="tag" style="background-color: rgba(255, 91, 192, 0.15); color: rgb(255, 91, 192);">
+                            <i class="fa-solid fa-venus"></i> Female
+                        </div>
+                        <div class="tag"
+                            style="background-color: rgba(150, 150, 150, 0.15); color: rgb(200, 200, 200);">
+                            <i class="fa-solid fa-flask"></i> Test Edilmedi
+                        </div>
+                        <a href="https://forum-tr.gta.world/index.php?/profile/1188-hwtzr/" target="_blank"
+                            style="text-decoration: none;">
+                            <div class="tag"
+                                style="background-color: rgba(234, 179, 8, 0.15); color: rgb(234, 179, 8); border-color: rgba(234, 179, 8, 0.2);">
+                                <i class="fa-solid fa-user-shield"></i> @hwtzr
+                            </div>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="meta">
+                    <div class="badge"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18"
+                            viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M12 2L14 8L20 10L14 12L12 18L10 12L4 10L10 8Z" />
+                            <path d="M19 14L20 17L23 18L20 19L19 22L18 19L15 18L18 17Z" opacity="0.6" />
+                            <path d="M5 15L6 17L8 18L6 19L5 21L4 19L2 18L4 17Z" opacity="0.6" />
+                        </svg> Google Gemini</div>
+                </div>
+            </div>
+            <div class="accordion-content">
+                <div class="inner">
+                    <div class="info-box" style="background-color: rgba(150, 150, 150, 0.1); border-left-color: #888;">
+                        <div class="info-icon" style="color: #888;"><i class="fa-solid fa-flask"></i></div>
+                        <div class="info-content">
+                            <div class="info-title">Test Edilmedi</div>
+                            <div class="info-text">Bu prompt henüz tarafımızca test edilmemiştir. Çıktıların kalitesi ve
+                                sahne tutarlılığı kullandığınız yapay zeka modeline göre değişkenlik gösterebilir,
+                                beklenmedik sonuçlarla karşılaşabilirsiniz.</div>
+                        </div>
+                    </div>
+                    <div class="code" id="p5">[1. CORE MANDATE & INPUT DEFINITION]
+                        - I am providing two reference images. You *MUST* merge them to create a single, *100%
+                        authentic*, GTA V in-game screenshot. The subject in the *generated* image is an entirely fully
+                        textured video game character (NPC/Pedestrian) belonging to the GTA V RAGE Engine universe. She
+                        is *NOT* a real human. Do *NOT* apply real-world human likeness parameters.
+                        - IMAGE 1 (Identity Reference): This image provides the exact female GTA V character face, skin
+                        marks map, skin texture, and hair. This is your *absolute identity baseline*.
+                        - IMAGE 2 (Scene Reference): This image provides the body pose, camera angle, outfit silhouette,
+                        background environment, lighting, and the *INTENT* of the facial expression.
+                        - You *MUST* render the final output strictly as a GTA V in-game screenshot, utilizing an
+                        advanced in-game graphics preset. The final image must look exactly like a direct gameplay
+                        screenshot or in-game photo mode capture, using the RAGE engine's lighting capabilities. Adapt
+                        the specific lighting direction, shadows, and atmospheric mood from Image 2 using GTA V's
+                        in-game dynamic lighting and volumetric effects.
+
+                        [2. CHARACTER RIGGING & FACIAL INTEGRITY]
+                        - Facial Features: Keep the exact facial structure, jawline, nose, lips, eyes, and eyebrows of
+                        Image 1. *LOCK* the sacred, fixed bone structure of Image 1, including the exact eye-socket
+                        distance, nose bridge, jawline shape, and lip volume. Do *NOT* alter her fundamental female
+                        facial anatomy. Do not beautify, alter, or change her identity in any way.
+                        - Expressions: Adapt the facial expression from Image 2 *ONLY* superficially (e.g., a smile or
+                        blink), without altering the core bone structure or identity of Image 1. When adapting
+                        expressions, the eyebrows *MUST NOT* morph or warp; they must retain the exact architectural
+                        form of Image 1. You are *explicitly forbidden* from copying the overall face shape, eyebrow
+                        style, or bone structure (cheeks, nose, jaw) from Image 2.
+                        - Hair: Maintain the exact hairstyle, volume, color, and hairline from Image 1. Retain the exact
+                        GTA V hair textures and game-rendered hair meshes.
+                        - Eyebrows: Strictly maintain the exact thickness, arch, and texture of the eyebrows from Image
+                        1.
+                        - Skin Details: Use game-appropriate skin shaders and retain the exact GTA V skin textures from
+                        Image 1. *Strictly match* the exact skin condition of Image 1. *IF* Image 1 has a clear
+                        complexion without freckles or marks, the final character *MUST* also have perfectly clear skin
+                        without any added blemishes. *ONLY IF* Image 1 has visible skin marks (freckles, moles, scars),
+                        you must preserve their exact density and pattern. *Absolutely no* glossy, smooth, or plastic
+                        CGI skin. Skin *MUST* strictly be rendered utilizing clean, high-quality RAGE Engine ped
+                        shaders. Avoid real-world photographic pores.
+                        - Tattoos & Body Marks: *Strictly match* the body art of Image 1. If Image 1 has clear skin, the
+                        final character must also have clear skin, completely ignoring any tattoos present in Image 2.
+
+                        [3. POSE, CAMERA & COMPOSITION LOCK]
+                        - Subject Kinematics & Placement: Replicate the exact body posture, head orientation, and hand
+                        gestures *strictly* from Image 2. The main character must occupy the exact same space, scale,
+                        and proportions within the frame.
+                        - Camera Parameters: Match the camera angle, tilt, focal length (distance), and perspective of
+                        Image 2 *perfectly*. The overall visual balance and framing must remain *strictly identical* to
+                        the reference photo.
+                        - Compositional Integrity: Ensure the vertical (portrait) framing is maintained, keeping the
+                        character-to-environment ratio *exactly* as seen in Image 2.
+
+                        [4. WORLD CONVERSION & ENVIRONMENTAL LOGIC]
+                        - Environment & Asset Transformation: Convert the entire background into a *100% accurate* GTA V
+                        in-game environment. Keep the original scene layout, but replace all real-world buildings,
+                        roads, vegetation, vehicles, and props with typical GTA V 3D assets.
+                        - Conditional Backgrounds: *IF* Image 2 features a solid color, plain, or clean studio
+                        background, *KEEP* the background plain and do not add environmental props.
+                        - Foreground Assets & Wardrobe: All clothing worn by the main character, as well as any
+                        personal/handheld items (glasses, jewelry, phones, bags, weapons), *MUST* be converted into
+                        standard GTA V lore-friendly 3D assets. Strip away real-world photographic fabric textures and
+                        replace them with generic game-engine meshes and GTA V cloth/metal shaders.
+                        - Lighting & Depth Adaptation: Adapt the original lighting direction and shadows from Image 2,
+                        but process them *strictly* through the RAGE engine's aesthetic. Utilize dynamic in-game ambient
+                        occlusion and contrast to create volume and depth.
+                        - Game Asset Crowds: Any background characters *MUST* strictly replicate the *exact number and
+                        placement* of figures explicitly visible in Image 2. *IF* Image 2 features *ONLY the main
+                        character*, the generated output *MUST NOT* add any extraneous figures, NPCs, or crowds. If
+                        present, they must have the typical game-engine look (typical game-engine LOD (Level of Detail)
+                        meshes and standard GTA V ped shaders). *Absolutely NO* photorealistic humans in the background.
+
+                        [5. NEGATIVE CONSTRAINTS & EXCLUSIONS]
+                        - *NO* Face Drift: Absolutely *NO* copying of the facial bone structure, jawline shape, nose
+                        type, eye-socket distance, or cheekbone height from Image 2. The anatomical identity must remain
+                        *100% anchored* to Image 1.
+                        - *NO* Photorealism: Do *NOT* use real-world photographic skin pores, fine facial hair realism,
+                        photographic lens flares, or DSLR bokeh effects. No 8k cinematic CGI or photographic textures.
+                        - *NO* Stylization Errors: Absolutely *NO* black outlines (cel-shading style) around characters
+                        or objects. No cartoonish filters, no sketches, and no artistic oil painting styles.
+                        - *NO* Hybrid Assets: Do *NOT* use photorealistic props in the scene. No highly detailed fabric
+                        weaves that look like high-res photography.
+                        - *NO* Degradation: No PS2/PS1 era low-polygon models, no intentional pixelation, and no
+                        "glitch" effects unless naturally occurring in high-end GTA V rendering.
+                        - *NO* *Unwanted* Background Characters: Absolutely *NO* adding extraneous NPCs, pedestrians, or
+                        crowds that are *not explicitly present* in Image 2. *NO* hallucinating extra people into the
+                        scene.
+                        - *NO* UI or HUD: *Strictly NO* in-game HUD elements, no Snapmatic icons, no watermarks, no
+                        social media text/likes, no usernames, and no borders or letterboxing. The image must be a
+                        clean, direct frame.
+
+                        [6. FINAL OUTPUT SPECIFICATIONS]
+                        - Aspect Ratio: Deliver the output in a vertical (portrait) 9:16 or 2:3 aspect ratio.
+                        - Clean Output Verification: The final image must be *100% clean*. No text, no icons, no
+                        watermarks, and no technical artifacts.
+                        - Image Quality & Clarity: High-resolution gameplay capture. The image should be crisp but
+                        retain the slight rendering imperfections typical of a real-time game engine screenshot. The
+                        resulting image must convincingly look like an *unaltered*, high-end screenshot taken directly
+                        by a player within the active GTA V game world.</div>
+                    <button class="btn" onclick="copyPrompt('p5')"><i class="fa-regular fa-copy"></i> Promptu
+                        Kopyala</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- SIX PROMPT -->
+        <div class="accordion-item">
+            <div class="accordion-header">
+                <div class="title">İkili Referansla Karakter Aktarımı (V2)
+                    <div class="tags">
+                        <div class="tag" style="background-color: rgba(91, 94, 255, 0.15); color: rgb(91, 135, 255);">
+                            <i class="fa-solid fa-mars"></i> Male
+                        </div>
+                        <div class="tag"
+                            style="background-color: rgba(150, 150, 150, 0.15); color: rgb(200, 200, 200);">
+                            <i class="fa-solid fa-flask"></i> Test Edilmedi
+                        </div>
+                        <a href="https://forum-tr.gta.world/index.php?/profile/1188-hwtzr/" target="_blank"
+                            style="text-decoration: none;">
+                            <div class="tag"
+                                style="background-color: rgba(234, 179, 8, 0.15); color: rgb(234, 179, 8); border-color: rgba(234, 179, 8, 0.2);">
+                                <i class="fa-solid fa-user-shield"></i> @hwtzr
+                            </div>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="meta">
+                    <div class="badge"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18"
+                            viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M12 2L14 8L20 10L14 12L12 18L10 12L4 10L10 8Z" />
+                            <path d="M19 14L20 17L23 18L20 19L19 22L18 19L15 18L18 17Z" opacity="0.6" />
+                            <path d="M5 15L6 17L8 18L6 19L5 21L4 19L2 18L4 17Z" opacity="0.6" />
+                        </svg> Google Gemini</div>
+                </div>
+            </div>
+            <div class="accordion-content">
+                <div class="inner">
+                    <div class="info-box" style="background-color: rgba(150, 150, 150, 0.1); border-left-color: #888;">
+                        <div class="info-icon" style="color: #888;"><i class="fa-solid fa-flask"></i></div>
+                        <div class="info-content">
+                            <div class="info-title">Test Edilmedi</div>
+                            <div class="info-text">Bu prompt henüz tarafımızca test edilmemiştir. Çıktıların kalitesi ve
+                                sahne tutarlılığı kullandığınız yapay zeka modeline göre değişkenlik gösterebilir,
+                                beklenmedik sonuçlarla karşılaşabilirsiniz.</div>
+                        </div>
+                    </div>
+                    <div class="code" id="p6">[1. CORE MANDATE & INPUT DEFINITION]
+                        - I am providing two reference images. You *MUST* merge them to create a single, *100%
+                        authentic*, GTA V in-game screenshot. The subject in the *generated* image is an entirely fully
+                        textured video game character (NPC/Pedestrian) belonging to the GTA V RAGE Engine universe. He
+                        is *NOT* a real human. Do *NOT* apply real-world human likeness parameters.
+                        - IMAGE 1 (Identity Reference): This image provides the exact male GTA V character face, skin
+                        marks map, skin texture, and hair. This is your *absolute identity baseline*.
+                        - IMAGE 2 (Scene Reference): This image provides the body pose, camera angle, outfit silhouette,
+                        background environment, lighting, and the *INTENT* of the facial expression.
+                        - You *MUST* render the final output strictly as a GTA V in-game screenshot, utilizing an
+                        advanced in-game graphics preset. The final image must look exactly like a direct gameplay
+                        screenshot or in-game photo mode capture, using the RAGE engine's lighting capabilities. Adapt
+                        the specific lighting direction, shadows, and atmospheric mood from Image 2 using GTA V's
+                        in-game dynamic lighting and volumetric effects.
+
+                        [2. CHARACTER RIGGING & FACIAL INTEGRITY]
+                        - Facial Features: Keep the exact facial structure, jawline, nose, lips, eyes, and eyebrows of
+                        Image 1. *LOCK* the sacred, fixed bone structure of Image 1, including the exact eye-socket
+                        distance, nose bridge, jawline shape, and lip volume. Do *NOT* alter his fundamental male facial
+                        anatomy. Do not beautify, alter, or change his identity in any way.
+                        - Expressions: Adapt the facial expression from Image 2 *ONLY* superficially (e.g., a smile or
+                        blink), without altering the core bone structure or identity of Image 1. You are *explicitly
+                        forbidden* from copying the overall face shape, eyebrow style, or bone structure (cheeks, nose,
+                        jaw) from Image 2.
+                        - Hair & Facial Hair: Maintain the exact hairstyle, beard/stubble, volume, color, and hairline
+                        from Image 1. Retain the exact GTA V hair textures and game-rendered hair meshes.
+                        - Eyebrows: Strictly maintain the exact thickness, arch, and texture of the eyebrows from Image
+                        1.
+                        - Skin Details: Use game-appropriate skin shaders and retain the exact GTA V skin textures from
+                        Image 1. *Strictly match* the exact skin condition of Image 1. *IF* Image 1 has a clear
+                        complexion without freckles or marks, the final character *MUST* also have perfectly clear skin
+                        without any added blemishes. *ONLY IF* Image 1 has visible skin marks (freckles, moles, scars),
+                        you must preserve their exact density and pattern. *Absolutely no* glossy, smooth, or plastic
+                        CGI skin. Skin *MUST* strictly be rendered utilizing clean, high-quality RAGE Engine ped
+                        shaders. Avoid real-world photographic pores.
+                        - Tattoos & Body Marks: *Strictly match* the body art of Image 1. If Image 1 has clear skin, the
+                        final character must also have clear skin, completely ignoring any tattoos present in Image 2.
+
+                        [3. POSE, CAMERA & COMPOSITION LOCK]
+                        - Subject Kinematics & Placement: Replicate the exact body posture, head orientation, and hand
+                        gestures *strictly* from Image 2. The main character must occupy the exact same space, scale,
+                        and proportions within the frame.
+                        - Camera Parameters: Match the camera angle, tilt, focal length (distance), and perspective of
+                        Image 2 *perfectly*. The overall visual balance and framing must remain *strictly identical* to
+                        the reference photo.
+                        - Compositional Integrity: Ensure the vertical (portrait) framing is maintained, keeping the
+                        character-to-environment ratio *exactly* as seen in Image 2.
+
+                        [4. WORLD CONVERSION & ENVIRONMENTAL LOGIC]
+                        - Environment & Asset Transformation: Convert the entire background into a *100% accurate* GTA V
+                        in-game environment. Keep the original scene layout, but replace all real-world buildings,
+                        roads, vegetation, vehicles, and props with typical GTA V 3D assets.
+                        - Conditional Backgrounds: *IF* Image 2 features a solid color, plain, or clean studio
+                        background, *KEEP* the background plain and do not add environmental props.
+                        - Foreground Assets & Wardrobe: All clothing worn by the main character, as well as any
+                        personal/handheld items (glasses, jewelry, phones, bags, weapons), *MUST* be converted into
+                        standard GTA V lore-friendly 3D assets. Strip away real-world photographic fabric textures and
+                        replace them with generic game-engine meshes and GTA V cloth/metal shaders.
+                        - Lighting & Depth Adaptation: Adapt the original lighting direction and shadows from Image 2,
+                        but process them *strictly* through the RAGE engine's aesthetic. Utilize dynamic in-game ambient
+                        occlusion and contrast to create volume and depth.
+                        - Game Asset Crowds: Any background characters *MUST* strictly replicate the *exact number and
+                        placement* of figures explicitly visible in Image 2. *IF* Image 2 features *ONLY the main
+                        character*, the generated output *MUST NOT* add any extraneous figures, NPCs, or crowds. If
+                        present, they must have the typical game-engine look (typical game-engine LOD (Level of Detail)
+                        meshes and standard GTA V ped shaders). *Absolutely NO* photorealistic humans in the background.
+
+                        [5. NEGATIVE CONSTRAINTS & EXCLUSIONS]
+                        - *NO* Face Drift: Absolutely *NO* copying of the facial bone structure, jawline shape, nose
+                        type, eye-socket distance, or cheekbone height from Image 2. The anatomical identity must remain
+                        *100% anchored* to Image 1.
+                        - *NO* Photorealism: Do *NOT* use real-world photographic skin pores, fine facial hair realism,
+                        photographic lens flares, or DSLR bokeh effects. No 8k cinematic CGI or photographic textures.
+                        - *NO* Stylization Errors: Absolutely *NO* black outlines (cel-shading style) around characters
+                        or objects. No cartoonish filters, no sketches, and no artistic oil painting styles.
+                        - *NO* Hybrid Assets: Do *NOT* use photorealistic props in the scene. No highly detailed fabric
+                        weaves that look like high-res photography.
+                        - *NO* Degradation: No PS2/PS1 era low-polygon models, no intentional pixelation, and no
+                        "glitch" effects unless naturally occurring in high-end GTA V rendering.
+                        - *NO* *Unwanted* Background Characters: Absolutely *NO* adding extraneous NPCs, pedestrians, or
+                        crowds that are *not explicitly present* in Image 2. *NO* hallucinating extra people into the
+                        scene.
+                        - *NO* UI or HUD: *Strictly NO* in-game HUD elements, no Snapmatic icons, no watermarks, no
+                        social media text/likes, no usernames, and no borders or letterboxing. The image must be a
+                        clean, direct frame.
+
+                        [6. FINAL OUTPUT SPECIFICATIONS]
+                        - Aspect Ratio: Deliver the output in a vertical (portrait) 9:16 or 2:3 aspect ratio.
+                        - Clean Output Verification: The final image must be *100% clean*. No text, no icons, no
+                        watermarks, and no technical artifacts.
+                        - Image Quality & Clarity: High-resolution gameplay capture. The image should be crisp but
+                        retain the slight rendering imperfections typical of a real-time game engine screenshot. The
+                        resulting image must convincingly look like an *unaltered*, high-end screenshot taken directly
+                        by a player within the active GTA V game world.</div>
+                    <button class="btn" onclick="copyPrompt('p6')"><i class="fa-regular fa-copy"></i> Promptu
+                        Kopyala</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- SEVEN PROMPT -->
+        <div class="accordion-item">
+            <div class="accordion-header">
+                <div class="title">Üçlü Referansla Karakter Aktarımı
+                    <div class="tags">
+                        <div class="tag" style="background-color: rgba(45, 212, 191, 0.15); color: rgb(45, 212, 191);">
+                            <i class="fa-solid fa-users"></i> Couple
+                        </div>
+                        <div class="tag"
+                            style="background-color: rgba(150, 150, 150, 0.15); color: rgb(200, 200, 200);">
+                            <i class="fa-solid fa-flask"></i> Test Edilmedi
+                        </div>
+                        <a href="https://forum-tr.gta.world/index.php?/profile/1188-hwtzr/" target="_blank"
+                            style="text-decoration: none;">
+                            <div class="tag"
+                                style="background-color: rgba(234, 179, 8, 0.15); color: rgb(234, 179, 8); border-color: rgba(234, 179, 8, 0.2);">
+                                <i class="fa-solid fa-user-shield"></i> @hwtzr
+                            </div>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="meta">
+                    <div class="badge"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18"
+                            viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M12 2L14 8L20 10L14 12L12 18L10 12L4 10L10 8Z" />
+                            <path d="M19 14L20 17L23 18L20 19L19 22L18 19L15 18L18 17Z" opacity="0.6" />
+                            <path d="M5 15L6 17L8 18L6 19L5 21L4 19L2 18L4 17Z" opacity="0.6" />
+                        </svg> Google Gemini</div>
+                </div>
+            </div>
+            <div class="accordion-content">
+                <div class="inner">
+                    <div class="info-box" style="background-color: rgba(150, 150, 150, 0.1); border-left-color: #888;">
+                        <div class="info-icon" style="color: #888;"><i class="fa-solid fa-flask"></i></div>
+                        <div class="info-content">
+                            <div class="info-title">Test Edilmedi</div>
+                            <div class="info-text">Bu prompt henüz tarafımızca test edilmemiştir. Çıktıların kalitesi ve
+                                sahne tutarlılığı kullandığınız yapay zeka modeline göre değişkenlik gösterebilir,
+                                beklenmedik sonuçlarla karşılaşabilirsiniz.</div>
+                        </div>
+                    </div>
+                    <div class="code" id="p7">[1. CORE MANDATE & INPUT DEFINITION]
+                        - I am providing three reference images. You *MUST* merge them to create a single, *100%
+                        authentic*, GTA V in-game screenshot featuring a couple. The subjects in the *generated* image
+                        are entirely fully textured video game characters (NPCs/Pedestrians) belonging to the GTA V RAGE
+                        Engine universe. They are *NOT* real humans. Do *NOT* apply real-world human likeness
+                        parameters.
+                        - IMAGE 1 (Identity Reference A): This image provides the exact GTA V character face, skin marks
+                        map, skin texture, and hair for the FIRST character (placed on the LEFT). This is your *absolute
+                        identity baseline* for Character A.
+                        - IMAGE 2 (Identity Reference B): This image provides the exact GTA V character face, skin marks
+                        map, skin texture, and hair for the SECOND character (placed on the RIGHT). This is your
+                        *absolute identity baseline* for Character B.
+                        - IMAGE 3 (Scene Reference): This image provides the physical interaction, body poses for both
+                        subjects, camera angle, outfit silhouettes, background environment, lighting, and the *INTENT*
+                        of their facial expressions.
+                        - You *MUST* render the final output strictly as a GTA V in-game screenshot, utilizing an
+                        advanced in-game graphics preset. The final image must look exactly like a direct gameplay
+                        screenshot or in-game photo mode capture, using the RAGE engine's lighting capabilities. Adapt
+                        the specific lighting direction, shadows, and atmospheric mood from Image 3 using GTA V's
+                        in-game dynamic lighting and volumetric effects.
+
+                        [2. CHARACTER RIGGING & FACIAL INTEGRITY]
+                        - Facial Features: Keep the exact facial structures, jawlines, noses, lips, eyes, and eyebrows
+                        of Image 1 (for Character A) and Image 2 (for Character B). *LOCK* their sacred, fixed bone
+                        structures, including exact eye-socket distances, nose bridges, jawline shapes, and lip volumes.
+                        Do *NOT* alter their fundamental facial anatomies. Do not beautify, alter, or change their
+                        individual identities, and *absolutely do NOT* blend or morph their faces together.
+                        - Expressions: Adapt the facial expressions from Image 3 *ONLY* superficially (e.g., a smile or
+                        blink), without altering the core bone structures or identities of Image 1 and Image 2. You are
+                        *explicitly forbidden* from copying the overall face shapes, eyebrow styles, or bone structures
+                        (cheeks, nose, jaw) of the subjects in Image 3.
+                        - Hair: Maintain the exact hairstyles, volume, colors, and hairlines strictly from Image 1 and
+                        Image 2 for their respective characters. Retain the exact GTA V hair textures and game-rendered
+                        hair meshes.
+                        - Eyebrows: Strictly maintain the exact thickness, arch, and texture of the eyebrows from Image
+                        1 (for Character A) and Image 2 (for Character B).
+                        - Skin Details: Use game-appropriate skin shaders and retain the exact GTA V skin textures from
+                        Image 1 and Image 2. *Strictly match* their respective skin conditions. *IF* a reference image
+                        has a clear complexion without freckles or marks, that specific character *MUST* also have
+                        perfectly clear skin without any added blemishes. *ONLY IF* a reference image has visible skin
+                        marks (freckles, moles, scars), you must preserve their exact density and pattern. *Absolutely
+                        no* glossy, smooth, or plastic CGI skin. Skin *MUST* strictly be rendered utilizing clean,
+                        high-quality RAGE Engine ped shaders. Avoid real-world photographic pores.
+                        - Tattoos & Body Marks: *Strictly match* the body art of Image 1 and Image 2. If a reference
+                        image has clear skin, that corresponding character must also have clear skin, completely
+                        ignoring any tattoos present on the subjects in Image 3.
+
+                        [3. POSE, CAMERA & COMPOSITION LOCK]
+                        - Subject Kinematics & Placement: Replicate the exact body postures, physical interaction, head
+                        orientations, and hand gestures *strictly* from Image 3. Both characters must occupy the exact
+                        same space, scale, and proportions within the frame.
+                        - Camera Parameters: Match the camera angle, tilt, focal length (distance), and perspective of
+                        Image 3 *perfectly*. The overall visual balance and framing must remain *strictly identical* to
+                        the reference photo.
+                        - Compositional Integrity: Ensure the vertical (portrait) framing is maintained, keeping the
+                        characters-to-environment ratio *exactly* as seen in Image 3.
+
+                        [4. WORLD CONVERSION & ENVIRONMENTAL LOGIC]
+                        - Environment & Asset Transformation: Convert the entire background into a *100% accurate* GTA V
+                        in-game environment. Keep the original scene layout, but replace all real-world buildings,
+                        roads, vegetation, vehicles, and props with typical GTA V 3D assets.
+                        - Conditional Backgrounds: *IF* Image 3 features a solid color, plain, or clean studio
+                        background, *KEEP* the background plain and do not add environmental props.
+                        - Foreground Assets & Wardrobe: All clothing worn by both main characters, as well as any
+                        personal/handheld items (glasses, jewelry, phones, bags, weapons), *MUST* be converted into
+                        standard GTA V lore-friendly 3D assets. Strip away real-world photographic fabric textures and
+                        replace them with generic game-engine meshes and GTA V cloth/metal shaders.
+                        - Lighting & Depth Adaptation: Adapt the original lighting direction and shadows from Image 3,
+                        but process them *strictly* through the RAGE engine's aesthetic. Utilize dynamic in-game ambient
+                        occlusion and contrast to create volume and depth.
+                        - Game Asset Crowds: Any background characters *MUST* strictly replicate the *exact number and
+                        placement* of figures explicitly visible in Image 3. *IF* Image 3 features *ONLY the main
+                        couple*, the generated output *MUST NOT* add any extraneous figures, NPCs, or crowds. If
+                        present, they must have the typical game-engine look (typical game-engine LOD meshes and
+                        standard GTA V ped shaders). *Absolutely NO* photorealistic humans in the background.
+
+                        [5. NEGATIVE CONSTRAINTS & EXCLUSIONS]
+                        - *NO* Face Drift or Swapping: Absolutely *NO* copying of the facial bone structures, jawline
+                        shapes, nose types, or cheekbone heights from Image 3. The anatomical identities must remain
+                        *100% anchored* to Image 1 (Character A) and Image 2 (Character B). *NO* mixing the identities
+                        of the two reference characters.
+                        - *NO* Photorealism: Do *NOT* use real-world photographic skin pores, fine facial hair realism,
+                        photographic lens flares, or DSLR bokeh effects. No 8k cinematic CGI or photographic textures.
+                        - *NO* Stylization Errors: Absolutely *NO* black outlines (cel-shading style) around characters
+                        or objects. No cartoonish filters, no sketches, and no artistic oil painting styles.
+                        - *NO* Hybrid Assets: Do *NOT* use photorealistic props in the scene. No highly detailed fabric
+                        weaves that look like high-res photography.
+                        - *NO* Degradation: No PS2/PS1 era low-polygon models, no intentional pixelation, and no
+                        "glitch" effects unless naturally occurring in high-end GTA V rendering.
+                        - *NO* *Unwanted* Background Characters: Absolutely *NO* adding extraneous NPCs, pedestrians, or
+                        crowds that are *not explicitly present* in Image 3. *NO* hallucinating extra people into the
+                        scene.
+                        - *NO* UI or HUD: *Strictly NO* in-game HUD elements, no Snapmatic icons, no watermarks, no
+                        social media text/likes, no usernames, and no borders or letterboxing. The image must be a
+                        clean, direct frame.
+
+                        [6. FINAL OUTPUT SPECIFICATIONS]
+                        - Aspect Ratio: Deliver the output in a vertical (portrait) 9:16 or 2:3 aspect ratio.
+                        - Clean Output Verification: The final image must be *100% clean*. No text, no icons, no
+                        watermarks, and no technical artifacts. </div>
+                    <button class="btn" onclick="copyPrompt('p7')"><i class="fa-regular fa-copy"></i> Promptu
+                        Kopyala</button>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+
+    <footer>
+        <div class="footer-left">
+            <a href="https://403forbibden.xyz/" class="footer-brand">403 Forbibden</a>
+            <span style="opacity: 0.2">|</span>
+            <span>&copy; 2026</span>
+        </div>
+
+
+        <div class="footer-right">
+            <div class="social-links">
+                <a href="https://discord.com/users/766277370872070155" class="social-link" title="Discord"
+                    target="_blank">
+                    <i class="fa-brands fa-discord"></i>
+                </a>
+                <a href="https://github.com/Forbibden" class="social-link" title="GitHub" target="_blank">
+                    <i class="fa-brands fa-github"></i>
                 </a>
             </div>
+            <span class="version-badge">v1.3.0</span>
         </div>
-    </div>
-</nav>
+    </footer>
 
-<div class="main">
-
-    <div class="disclaimer">
-        <i class="fa-solid fa-triangle-exclamation" style="color: var(--warning); font-size: 20px;"></i>
-        <div>Bu kütüphanedeki promptlar açık kaynaklardan derlenmiştir. Telif hakkı ilgili sahibine aittir.</div>
-    </div>
-
-    <!-- STABLE PROMPT (AUTO OPEN) -->
-    <div class="accordion-item">
-        <div class="accordion-header">
-            <div>
-                <div class="title">Sosyal Medya Konsepti (Kusursuz Karışım)</div>
-                <div class="tags">
-                    <div class="tag" style="background-color: rgba(255, 170, 91, 0.15); color: rgb(255, 189, 91);"><i class="fa-solid fa-globe"></i> Global</div>
-                    <div class="tag" style="background-color: rgba(110, 255, 91, 0.15); color: rgb(118, 255, 91);"><i class="fa-solid fa-check-double"></i> Stabil</div>
-                </div>
-            </div>
-
-            <div class="meta">
-                    <div class="badge"><svg xmlns="http://www.w3.org/2000/svg" 
-                    width="18" height="18" 
-                    viewBox="0 0 24 24" 
-                    fill="currentColor">
-                <path d="M12 2L14 8L20 10L14 12L12 18L10 12L4 10L10 8Z"/>
-                <path d="M19 14L20 17L23 18L20 19L19 22L18 19L15 18L18 17Z" opacity="0.6"/>
-                <path d="M5 15L6 17L8 18L6 19L5 21L4 19L2 18L4 17Z" opacity="0.6"/>
-                </svg>
-                    Google Gemini</div>
-            </div>
-    </div>
-        <div class="accordion-content">
-            <div class="inner">
-                <div class="info-box success">
-                    <div class="info-icon">
-                        <i class="fa-solid fa-brain"></i>
-                    </div>
-                    <div class="info-content">
-                        <div class="info-title">Yüksek Stabilite</div>
-                        <div class="info-text">
-                            Bu prompt görev tanımını net verir: yüz korunur, poz aktarılır ve ortam GTA V içinde yeniden oluşturulur. Negatif talimatlar vardır ancak aşırı tekrar içermez.
-                        </div>
-                    </div>
-                </div>
-                <div class="code" id="p1">
-Generate a raw GTA V in-game screenshot (FiveM/Menyoo style) by blending these two references for a social media post: Character Source (Image 1 - GTA V Character): Preserve the original GTA V mesh structure and in-game texture resolution without increasing detail. Do NOT beautify, smooth, or photorealistically enhance the face. It must look like the original 3D game model. Pose & Style Source (Image 2 - Reference): Transfer the exact pose, body language, outfit, accessories, and camera angle from this image onto the GTA V character. Context: The character is 21 years old. Place her in a fitting GTA V Los Santos environment that matches the lighting of the reference. The final result must look like an unedited, authentic gameplay screenshot, not a realistic photo. NO HUD elements. Safety: Generate only fictional, safe-for-work video game style content; no real-person identity transfer or deepfake-like edits. Do not add subsurface skin detail, pore detail, or high dynamic range lighting.
-                </div>
-                <button class="btn" onclick="copyPrompt('p1')"><i class="fa-regular fa-copy"></i> Promptu Kopyala</button>
-            </div>
-        </div>
-    </div>
-
-    <!-- SECOND PROMPT -->
-    <div class="accordion-item">
-        <div class="accordion-header">
-            <div class="title">Katı Yüz Korumalı Poz Aktarımı (Erkek)
-                 <div class="tags">
-                    <div class="tag" style="background-color: rgba(91, 94, 255, 0.15); color: rgb(91, 135, 255);"><i class="fa-solid fa-mars"></i> Male</div>
-                    <div class="tag" style="background-color: rgba(255, 91, 91, 0.15); color: rgb(255, 91, 91);"><i class="fa-solid fa-xmark"></i> Düşük Stabilite</div>
-                </div>
-            </div>
-            
-            <div class="meta">
-                <div class="badge"><svg xmlns="http://www.w3.org/2000/svg" 
-                    width="18" height="18" 
-                    viewBox="0 0 24 24" 
-                    fill="currentColor">
-                <path d="M12 2L14 8L20 10L14 12L12 18L10 12L4 10L10 8Z"/>
-                <path d="M19 14L20 17L23 18L20 19L19 22L18 19L15 18L18 17Z" opacity="0.6"/>
-                <path d="M5 15L6 17L8 18L6 19L5 21L4 19L2 18L4 17Z" opacity="0.6"/>
-                </svg>
-                    Google Gemini</div>
-            </div>
-        </div>
-        <div class="accordion-content">
-            <div class="inner">
-                <div class="info-box low">
-                    <div class="info-icon">
-                        <i class="fa-solid fa-brain"></i>
-                    </div>
-                    <div class="info-content">
-                        <div class="info-title">Düşük Stabilite</div>
-                        <div class="info-text">
-                            Bu prompt aşırı katı “%100 identical” ve yoğun negatif talimat içerir. Modelden yüzü tamamen sabit tutması istenirken aynı zamanda yeni sahne ve poz üretmesi beklenir. Bu katı kısıtlamalar bazı denemelerde photoreal detay eklenmesine veya yüzün hafif değişmesine yol açabilir.</div>
-                    </div>
-                </div>
-                <div class="code" id="p2">
-Use ONLY the uploaded GTA V male character’s ORIGINAL FACE and ORIGINAL HAIR. The character’s face must remain 100% IDENTICAL to the original GTA V face model with absolutely NO changes of any kind. Do NOT modify, beautify, smooth, enhance, replace, reshape, blend, stylize, reinterpret, or alter the face in any way. Do NOT change facial structure, proportions, jawline, nose, lips, eyes, eyebrows, ears, cheekbones, head shape, skull structure, or any facial detail. Keep the exact GTA V skin texture, skin tone, polygon structure, imperfections, roughness, and all in-game facial materials exactly as they are. Do NOT improve skin quality, do NOT remove GTA V graphical artifacts, and do NOT add realism or photorealistic detail. The hair must remain completely unchanged and identical to the original GTA V hair model, including haircut, hairline, length, density, texture, and GTA V hair material. If the character has facial hair, beard, or stubble, it must remain exactly the same with no edits, no enhancements, no reshaping, and no added detail. Do NOT copy, recreate, reference, imitate, or blend the real man’s face from the reference image under any circumstances. Do NOT mix facial features, do NOT introduce realistic human elements, and do NOT transfer facial expressions or facial details from the reference man. Everything must remain strictly within the original GTA V graphical style and engine limitations. From the reference man’s photo, take ONLY the pose, body posture, outfit, clothing pieces, accessories, and jewelry, and recreate them on the GTA V character while keeping the original GTA V face and hair completely untouched. Do NOT transfer facial expressions or any facial information from the reference image. The final image must look exactly like a real in-game screenshot captured directly inside GTA V using Menyoo, RageMP, or FiveM. Use Rockstar Advanced Game Engine lighting, authentic GTA V shaders, original GTA V textures, GTA V skin materials, and GTA V hair materials. Maintain hard GTA V shadows, visible polygon edges, in-game lighting imperfections, and typical GTA V rendering artifacts. Do NOT use cinematic lighting, Unreal Engine style, ray tracing, hyperrealism, depth-of-field effects, film grain, motion blur, or real-life photography aesthetics. The background environment is EXTREMELY IMPORTANT and must be 100% GTA V–accurate. The scene must take place in a recognizable GTA V world environment such as Los Santos streets, Vespucci Beach, Downtown LS, Mirror Park, a GTA V parking lot, alleyway, highway, or urban neighborhood. Use only GTA V buildings, roads, sidewalks, props, vegetation, skybox, and environmental assets. The background must clearly look like it was rendered inside GTA V, with correct scale, lighting, textures, and world geometry. Do NOT use real-life locations, real-world photography, Unreal-style environments, or generic backgrounds. The environment must fully match GTA V’s in-game map, assets, and visual limitations. The final result must be a GTA V male character with his original, completely unchanged face and hair, wearing the outfit, accessories, and jewelry from the reference man, posed the same way, standing inside a fully authentic GTA V environment, and looking exactly like a raw in-game screenshot taken directly from GTA V without any external rendering or post-processing.
-                </div>
-                <button class="btn" onclick="copyPrompt('p2')"><i class="fa-regular fa-copy"></i> Promptu Kopyala</button>
-            </div>
-        </div>
-    </div>
-
-    <!-- THREE PROMPT -->
-    <div class="accordion-item">
-        <div class="accordion-header">
-            <div class="title">Katı Yüz Korumalı Poz Aktarımı (Kadın)
-                <div class="tags">
-                    <div class="tag" style="background-color: rgba(255, 91, 192, 0.15); color: rgba(255, 91, 192, 1);"><i class="fa-solid fa-venus"></i> Female</div>
-                    <div class="tag" style="background-color: rgba(255, 91, 91, 0.15); color: rgb(255, 91, 91);"><i class="fa-solid fa-xmark"></i> Düşük Stabilite</div>
-                </div>
-            </div>
-            
-            <div class="meta">
-                <div class="badge"><svg xmlns="http://www.w3.org/2000/svg" 
-                    width="18" height="18" 
-                    viewBox="0 0 24 24" 
-                    fill="currentColor">
-                <path d="M12 2L14 8L20 10L14 12L12 18L10 12L4 10L10 8Z"/>
-                <path d="M19 14L20 17L23 18L20 19L19 22L18 19L15 18L18 17Z" opacity="0.6"/>
-                <path d="M5 15L6 17L8 18L6 19L5 21L4 19L2 18L4 17Z" opacity="0.6"/>
-                </svg>
-                    Google Gemini</div>
-            </div>
-        </div>
-        <div class="accordion-content">
-            <div class="inner">
-                <div class="info-box low">
-                    <div class="info-icon">
-                        <i class="fa-solid fa-brain"></i>
-                    </div>
-                    <div class="info-content">
-                        <div class="info-title">Düşük Stabilite</div>
-                        <div class="info-text">
-                            Bu prompt aşırı katı “%100 identical” ve yoğun negatif talimat içerir. Modelden yüzü tamamen sabit tutması istenirken aynı zamanda yeni sahne ve poz üretmesi beklenir. Bu katı kısıtlamalar bazı denemelerde photoreal detay eklenmesine veya yüzün hafif değişmesine yol açabilir.</div>
-                    </div>
-                </div>
-                <div class="code" id="p3">
-Use ONLY the uploaded GTA V female character’s ORIGINAL FACE and ORIGINAL HAIR. The character’s face must remain 100% IDENTICAL to the original GTA V face model with absolutely NO changes of any kind. Do NOT modify, beautify, smooth, enhance, replace, reshape, blend, stylize, reinterpret, or alter the face in any way. Do NOT change facial structure, proportions, jawline, nose, lips, eyes, eyebrows, ears, cheekbones, head shape, skull structure, or any facial detail. Keep the exact GTA V skin texture, skin tone, polygon structure, imperfections, roughness, and all in-game facial materials exactly as they are. Do NOT improve skin quality, do NOT remove GTA V graphical artifacts, and do NOT add realism or photorealistic detail. The hair must remain completely unchanged and identical to the original GTA V hair model, including haircut, hairline, length, density, texture, and GTA V hair material. If the character has facial hair, beard, or stubble, it must remain exactly the same with no edits, no enhancements, no reshaping, and no added detail. Do NOT copy, recreate, reference, imitate, or blend the real female's face from the reference image under any circumstances. Do NOT mix facial features, do NOT introduce realistic human elements, and do NOT transfer facial expressions or facial details from the reference man. Everything must remain strictly within the original GTA V graphical style and engine limitations. From the reference female's photo, take ONLY the pose, body posture, outfit, clothing pieces, accessories, and jewelry, and recreate them on the GTA V character while keeping the original GTA V face and hair completely untouched. Do NOT transfer facial expressions or any facial information from the reference image. The final image must look exactly like a real in-game screenshot captured directly inside GTA V using Menyoo, RageMP, or FiveM. Use Rockstar Advanced Game Engine lighting, authentic GTA V shaders, original GTA V textures, GTA V skin materials, and GTA V hair materials. Maintain hard GTA V shadows, visible polygon edges, in-game lighting imperfections, and typical GTA V rendering artifacts. Do NOT use cinematic lighting, Unreal Engine style, ray tracing, hyperrealism, depth-of-field effects, film grain, motion blur, or real-life photography aesthetics. The background environment is EXTREMELY IMPORTANT and must be 100% GTA V–accurate. The scene must take place in a recognizable GTA V world environment such as Los Santos streets, Vespucci Beach, Downtown LS, Mirror Park, a GTA V parking lot, alleyway, highway, or urban neighborhood. Use only GTA V buildings, roads, sidewalks, props, vegetation, skybox, and environmental assets. The background must clearly look like it was rendered inside GTA V, with correct scale, lighting, textures, and world geometry. Do NOT use real-life locations, real-world photography, Unreal-style environments, or generic backgrounds. The environment must fully match GTA V’s in-game map, assets, and visual limitations.
-                </div>
-                <button class="btn" onclick="copyPrompt('p3')"><i class="fa-regular fa-copy"></i> Promptu Kopyala</button>
-            </div>
-        </div>
-    </div>
-
-    <!-- FOUR PROMPT -->
-    <div class="accordion-item">
-        <div class="accordion-header">
-            <div class="title">Sıfır Toleranslı Çevre Yeniden Yaratımı (Global)
-                 <div class="tags">
-                    <div class="tag" style="background-color: rgba(255, 170, 91, 0.15); color: rgb(255, 189, 91);"><i class="fa-solid fa-globe"></i> Global</div>
-                    <div class="tag" style="background-color: rgba(255, 91, 91, 0.15); color: rgb(255, 91, 91);"><i class="fa-solid fa-xmark"></i> Düşük Stabilite</div>
-                </div>
-            </div>
-            
-            <div class="meta">
-                <div class="badge"><svg xmlns="http://www.w3.org/2000/svg" 
-                    width="18" height="18" 
-                    viewBox="0 0 24 24" 
-                    fill="currentColor">
-                <path d="M12 2L14 8L20 10L14 12L12 18L10 12L4 10L10 8Z"/>
-                <path d="M19 14L20 17L23 18L20 19L19 22L18 19L15 18L18 17Z" opacity="0.6"/>
-                <path d="M5 15L6 17L8 18L6 19L5 21L4 19L2 18L4 17Z" opacity="0.6"/>
-                </svg>
-                    Google Gemini</div>
-            </div>
-        </div>
-        <div class="accordion-content">
-            <div class="inner">
-                <div class="info-box low">
-                    <div class="info-icon">
-                        <i class="fa-solid fa-brain"></i>
-                    </div>
-                    <div class="info-content">
-                        <div class="info-title">Düşük Stabilite</div>
-                        <div class="info-text">
-                            <p>Yapılandırılmış ve teknik olarak net olsa da çok fazla engine ve stil kısıtlaması içerir. Model bazı denemelerde photorealistik eğilime kayabilir veya sahneyi fazla sadeleştirebilir. Özellikle “full synthetic recreation” talebi bazı varyasyonlarda tutarsız sonuç üretebilir.</p>
-                        </div>
-                </div>
-                </div>
-                <div class="code" id="p4">
-{    "ABSOLUTE_OVERRIDE_RULE": {      "priority": "HIGHEST",      "instruction": "The uploaded reference image MUST NOT be reused, traced, filtered, color-graded, or partially preserved in any way. Reusing original pixels is a hard failure.",      "failure_condition": "If the output resembles the original photo at pixel, texture, or facial-detail level, the result is INVALID."    },    "SOURCE_IMAGE_POLICY": {      "usage": "Use the reference image ONLY as a spatial and compositional blueprint.",      "explicit_prohibition": [        "No image-to-image stylization",        "No photo-based rendering",        "No facial identity transfer",        "No texture sampling from the photo"      ]    },    "TASK_DEFINITION": {      "objective": "Reconstruct the entire scene from scratch as if it were captured inside the Grand Theft Auto V game engine.",      "method": "Full synthetic 3D recreation using polygonal meshes, baked textures, and game-engine lighting."    },    "STYLE_AND_ENGINE_CONSTRAINTS": {      "engine": "GTA V RAGE Engine (2013–2015 era)",      "visual_identity": [        "Clearly polygonal character models",        "Game-engine skin shaders (slightly waxy, non-photoreal)",        "Repeating environment textures with visible tiling",        "LOD-style geometry simplification"      ],      "strictly_avoid": [        "Photorealism",        "AI-upscaled realism",        "Cinematic CGI renders",        "Photo-like skin pores or cloth fibers"      ]    },    "CHARACTER_RECONSTRUCTION_RULES": {      "identity": "Characters must resemble generic GTA V NPCs or protagonists, NOT the real person.",      "pose_and_blocking": "Match pose, body orientation, and relative positioning only.",      "face_rule": "Faces must look like GTA NPC meshes — simplified topology, not real human likeness."    },    "ENVIRONMENT_TRANSLATION": {      "world": "Los Santos equivalent environment only.",      "object_mapping_examples": {        "smartphone": "in-game iFruit phone prop",        "street": "GTA asphalt texture with decals",        "buildings": "Los Santos modular architecture assets",        "vegetation": "GTA V foliage system"      },      "background_rule": "The background must look like an open-world game map, not a photographed city."    },    "LIGHTING_AND_RENDERING": {      "lighting_model": "Real-time GTA V lighting and shadow system",      "atmosphere": "Subtle in-game haze and distance fog",      "camera": "Standard third-person or free-roam gameplay camera"    },    "OUTPUT_SPECIFICATION": {      "format": "4K in-game screenshot look",      "ui": "NO HUD, NO minimap, NO UI",      "focus": "Gameplay-level sharpness, visible textures, no cinematic blur"    },    "NEGATIVE_PROMPT": [      "Original photo preserved",      "Filtered photograph",      "Same face as reference",      "Hyper-real skin",      "Cinematic movie still",      "AI photo realism",      "Loading screen illustration",      "Concept art painting style"    ]  }
-                </div>
-                <button class="btn" onclick="copyPrompt('p4')"><i class="fa-regular fa-copy"></i> Promptu Kopyala</button>
-            </div>
-        </div>
-    </div>
-
-</div>
+    <script>
+        const headers = document.querySelectorAll(".accordion-header");
+        headers.forEach((header, index) => {
+            header.addEventListener("click", () => {
+                const content = header.nextElementSibling;
+                document.querySelectorAll(".accordion-content").forEach(c => { if (c !== content) { c.style.maxHeight = 0; c.classList.remove("open"); } }); if (content.style.maxHeight && content.style.maxHeight !== "0px") { content.style.maxHeight = 0; content.classList.remove("open"); } else { content.style.maxHeight = (content.scrollHeight + 20) + "px"; content.classList.add("open"); }
+            }); if (index === 0) { const firstContent = header.nextElementSibling; firstContent.style.maxHeight = (firstContent.scrollHeight + 20) + "px"; firstContent.classList.add("open"); }
+        });
 
 
-<footer>
-    <div class="footer-left">
-        <span>&copy; 2026</span>
-        <span style="opacity: 0.3">|</span>
-        <a href="https://forbibden.xyz" class="footer-brand">Forbibden</a>
-        <span style="opacity: 0.3" class="hide-mobile">|</span>
-        <span class="hide-mobile">PromptHub</span>
-    </div>
+        function showToast(message) {
+            const existingToast = document.querySelector('.toast');
+            if (existingToast) {
+                existingToast.remove();
+            }
 
-    <div class="footer-right">
-        <div class="social-links">
-            <a href="https://discord.com/users/766277370872070155" class="social-link" title="Discord Sunucusu">
-                <i class="fa-brands fa-discord"></i>
-            </a>
-            <a href="https://github.com/Forbibden" class="social-link" title="GitHub Projesi">
-                <i class="fa-brands fa-github"></i>
-            </a>
-        </div>
-        
-        <span style="opacity: 0.3" class="hide-mobile">|</span>
-        
-        <span class="version-badge">v1.3.0</span>
-    </div>
-</footer>
+            const toast = document.createElement('div');
+            toast.className = 'toast';
 
-<script> 
-    const headers = document.querySelectorAll(".accordion-header"); 
-    headers.forEach((header, index) => { header.addEventListener("click", () => { 
-        const content = header.nextElementSibling; 
-        document.querySelectorAll(".accordion-content").forEach(c => { if(c !== content){ c.style.maxHeight = 0; c.classList.remove("open"); } }); if(content.style.maxHeight && content.style.maxHeight !== "0px"){ content.style.maxHeight = 0; content.classList.remove("open"); } else { content.style.maxHeight = (content.scrollHeight + 20) + "px"; content.classList.add("open"); } }); if(index === 0){ const firstContent = header.nextElementSibling; firstContent.style.maxHeight = (firstContent.scrollHeight + 20) + "px"; firstContent.classList.add("open"); } }); 
-        
-        
-    function showToast(message) {
-        const existingToast = document.querySelector('.toast');
-        if (existingToast) {
-            existingToast.remove();
-        }
-
-        const toast = document.createElement('div');
-        toast.className = 'toast';
-        
-        toast.innerHTML = `
+            toast.innerHTML = `
             <div style="display: flex; align-items: center; justify-content: center; width: 26px; height: 26px; border-radius: 50%; background: rgba(63, 185, 80, 0.15); flex-shrink: 0;">
                 <i class="fa-solid fa-check" style="color: var(--green); font-size: 14px;"></i>
             </div>
             <span style="letter-spacing: 0.3px;">${message}</span>
         `;
-        
-        document.body.appendChild(toast);
 
-        setTimeout(() => {
-            toast.classList.add('show');
-        }, 10);
+            document.body.appendChild(toast);
 
-        setTimeout(() => {
-            toast.classList.remove('show');
-            setTimeout(() => toast.remove(), 400); 
-        }, 3000);
-    }
+            setTimeout(() => {
+                toast.classList.add('show');
+            }, 10);
+
+            setTimeout(() => {
+                toast.classList.remove('show');
+                setTimeout(() => toast.remove(), 400);
+            }, 3000);
+        }
 
 
-function copyPrompt(id) {
-    const text = document.getElementById(id).innerText;
-    
-    navigator.clipboard.writeText(text).then(() => {
-        showToast("Prompt başarıyla kopyalandı!");
-        text.innerText = 'Kopyalandı';
-    }).catch(err => {
-        console.error('Kopyalama hatası:', err);
-        showToast("Kopyalama başarısız oldu.");
-    });
-}
-</script>
+        function copyPrompt(id) {
+            const text = document.getElementById(id).innerText;
+
+            navigator.clipboard.writeText(text).then(() => {
+                showToast("Prompt başarıyla kopyalandı!");
+            }).catch(err => {
+                console.error('Kopyalama hatası:', err);
+                showToast("Kopyalama başarısız oldu.");
+            });
+        }
+
+        // ARAMA VE FİLTRELEME MANTIĞI
+        const searchInput = document.getElementById('promptSearch');
+        const filterChips = document.querySelectorAll('.filter-chip');
+        const accordions = document.querySelectorAll('.accordion-item');
+
+        function filterPrompts() {
+            const searchTerm = searchInput.value.toLowerCase();
+            const activeChip = document.querySelector('.filter-chip.active').getAttribute('data-filter');
+
+            accordions.forEach(item => {
+                const titleText = item.querySelector('.title').innerText.toLowerCase();
+                // For empty inputs via contenteditable, we check its content
+                const codeElem = item.querySelector('.code');
+                const contentText = codeElem ? codeElem.innerText.toLowerCase() : "";
+                const tags = Array.from(item.querySelectorAll('.tag')).map(t => t.innerText.trim());
+
+                const matchesSearch = titleText.includes(searchTerm) || contentText.includes(searchTerm);
+
+                let matchesFilter = false;
+                if (activeChip === 'all') {
+                    matchesFilter = true;
+                } else {
+                    // Check if any tag contains the active filter keyword
+                    matchesFilter = tags.some(tag => tag.includes(activeChip));
+                }
+
+                if (matchesSearch && matchesFilter) {
+                    item.style.display = "block";
+                    // Optional: reset accordion state when filtering to avoid broken UI
+                    // But preserving it is fine too.
+                } else {
+                    item.style.display = "none";
+                }
+            });
+        }
+
+        searchInput.addEventListener('input', filterPrompts);
+
+        filterChips.forEach(chip => {
+            chip.addEventListener('click', () => {
+                filterChips.forEach(c => c.classList.remove('active'));
+                chip.classList.add('active');
+                filterPrompts();
+            });
+        });
+    </script>
 
 </body>
+
 </html>
